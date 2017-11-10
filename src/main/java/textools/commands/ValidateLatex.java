@@ -8,7 +8,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import textools.Command;
+import textools.Formatter;
 import textools.commands.latex.Latex;
+import textools.cop.Location;
+import textools.cop.Offense;
 import textools.tasks.FileSystemTasks;
 
 /**
@@ -17,6 +20,8 @@ import textools.tasks.FileSystemTasks;
  * Rules adopted by chktex (http://baruch.ev-en.org/proj/chktex/)
  */
 public class ValidateLatex implements Command {
+
+    private final Formatter formatter = new Formatter();
 
     @Override
     public String getName() {
@@ -109,7 +114,23 @@ public class ValidateLatex implements Command {
     private void applyPattern(Path texFile, int lineNumber, String line, Pattern pattern, String message) {
         Matcher matcher = pattern.matcher(line);
         while (matcher.find()) {
-            System.out.format("%s#%4d,%-4d %s%n", FileSystemTasks.workingDirectory.relativize(texFile), lineNumber, matcher.start(), message);
+            int column = 0;
+            int length = 0;
+
+            if (matcher.groupCount() >= 1) {
+                for (int i = 1; i <= matcher.groupCount(); i++) {
+                    column = matcher.start(i);
+                    length = matcher.end(i) - matcher.start(i);
+                }
+            } else {
+                column = matcher.start();
+                length = matcher.end() - matcher.start();
+            }
+
+            Location location = new Location(line, lineNumber, column, length);
+            Offense offense = new Offense(location, message);
+
+            formatter.reportOffense(texFile, offense);
         }
     }
 }
