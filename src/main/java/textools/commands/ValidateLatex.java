@@ -1,6 +1,7 @@
 package textools.commands;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,11 +37,15 @@ public class ValidateLatex implements Command {
     @Override
     public void execute() {
         List<Path> texFiles = new FileSystemTasks().getFilesByExtension(".tex");
+        formatter.started(texFiles.size());
         Latex.with(texFiles, (line, lineNumber, file) -> {
+            List<Offense> offenses = new ArrayList<>();
             for (Map.Entry<Pattern, String> entry : COMPILED_RULES.entrySet()) {
-                applyPattern(file, lineNumber, line, entry.getKey(), entry.getValue());
+                offenses.addAll(applyPattern(file, lineNumber, line, entry.getKey(), entry.getValue()));
             }
+            formatter.fileFinished(file, offenses);
         });
+        formatter.finished(texFiles.size());
     }
 
     private static Map<String, String> getRules() {
@@ -111,7 +116,8 @@ public class ValidateLatex implements Command {
 
     public static final Map<Pattern, String> COMPILED_RULES = getCompiledRules();
 
-    private void applyPattern(Path texFile, int lineNumber, String line, Pattern pattern, String message) {
+    private List<Offense> applyPattern(Path texFile, int lineNumber, String line, Pattern pattern, String message) {
+        List<Offense> offenses = new ArrayList<>();
         Matcher matcher = pattern.matcher(line);
         while (matcher.find()) {
             int column = 0;
@@ -128,9 +134,8 @@ public class ValidateLatex implements Command {
             }
 
             Location location = new Location(line, lineNumber, column, length);
-            Offense offense = new Offense(location, message);
-
-            formatter.reportOffense(texFile, offense);
+            offenses.add(new Offense(location, message));
         }
+        return offenses;
     }
 }
