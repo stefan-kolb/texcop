@@ -31,6 +31,10 @@ public class Formatter {
 
         System.out.format("%s:%d:%d: %s%n", FileSystemTasks.workingDirectory.relativize(filePath), offense.location.line, offense.location.column, offense.message);
         System.out.format("%s%n", offense.location.sourceLine);
-        System.out.format("%" + offense.location.column + "s%s\n", "", String.join("", Collections.nCopies(offense.location.length, "^")));
+        if (offense.location.column != 0) {
+            System.out.format("%" + offense.location.column + "s%s\n", "", String.join("", Collections.nCopies(offense.location.length, "^")));
+        } else {
+            System.out.format("%s%s\n", "", String.join("", Collections.nCopies(offense.location.length, "^")));
+        }
     }
 }
