@@ -80,15 +80,15 @@ public class ValidateLatex implements Command {
 
         rules.put("behaviour", "Use the AE when possible: 'behavior'");
 
-        rules.put("all of the ", "Instead of 'all of the' use 'all the'");
+        rules.put("(all of the) ", "Instead of 'all of the' use 'all the'");
         rules.put("Tt ", "Use It instead of Tt");
         rules.put(" a bit ", "Too informal (a bit)");
         rules.put("( a|A) lot of ", "Too informal (a lot of)");
         rules.put("( a|A) couple of ", "Too informal (a couple of)");
         rules.put(" till ", "Too informal (till)");
-        rules.put("( t|T)hing( |s |\\.|s\\.)", "Too informal (thing)");
-        rules.put(" always ", "Too exaggerated (always)");
-        rules.put(" never ", "Too exaggerated (always)");
+        rules.put("((?: t|T)hing(?: |s |\\.|s\\.))", "Too informal (thing)");
+        rules.put(" (always) ", "Too exaggerated (always)");
+        rules.put(" (never) ", "Too exaggerated (never)");
 
         rules.put("\\[(pp|p)\\. [0-9]+\\]", "Use ~ instead ([p.~4]");
         rules.put("\\\\footnote\\{See \\\\url\\{[^\\}]+\\}\\}", "Remove 'see' as it is unnecessary");
