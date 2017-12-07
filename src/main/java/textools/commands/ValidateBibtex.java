@@ -1,5 +1,10 @@
 package textools.commands;
 
+import org.jbibtex.*;
+import textools.FileTask;
+import textools.cop.Offense;
+import textools.tasks.FileSystemTasks;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -10,17 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jbibtex.BibTeXDatabase;
-import org.jbibtex.BibTeXEntry;
-import org.jbibtex.BibTeXParser;
-import org.jbibtex.Key;
-import org.jbibtex.ParseException;
-import org.jbibtex.TokenMgrException;
-import textools.Command;
-import textools.cop.Offense;
-import textools.tasks.FileSystemTasks;
-
-public class ValidateBibtex implements Command {
+public class ValidateBibtex implements FileTask {
 
     @Override
     public String getName() {
@@ -32,7 +27,6 @@ public class ValidateBibtex implements Command {
         return "validates all .bib files for the existence of certain fields";
     }
 
-    @Override
     public void execute() {
         List<Path> bibtexFiles = new FileSystemTasks().getFilesByExtension(".bib");
 
@@ -47,7 +41,7 @@ public class ValidateBibtex implements Command {
     }
 
     @Override
-    public List<Offense> run(Path file) {
+    public List<Offense> execute(Path file) {
         return null;
     }
 

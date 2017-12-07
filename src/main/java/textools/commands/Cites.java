@@ -1,5 +1,10 @@
 package textools.commands;
 
+import textools.FileTask;
+import textools.commands.latex.Latex;
+import textools.cop.Offense;
+import textools.tasks.FileSystemTasks;
+
 import java.nio.file.Path;
 import java.text.Collator;
 import java.util.ArrayList;
@@ -9,12 +14,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import textools.Command;
-import textools.commands.latex.Latex;
-import textools.cop.Offense;
-import textools.tasks.FileSystemTasks;
-
-public class Cites implements Command {
+public class Cites implements FileTask {
 
     @Override
     public String getName() {
@@ -26,7 +26,6 @@ public class Cites implements Command {
         return "Print used cites";
     }
 
-    @Override
     public void execute() {
         Map<String, Integer> citations = getCitations();
 
@@ -56,7 +55,7 @@ public class Cites implements Command {
     }
 
     @Override
-    public List<Offense> run(Path file) {
+    public List<Offense> execute(Path file) {
         return null;
     }
 

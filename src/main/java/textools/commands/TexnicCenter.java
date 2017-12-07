@@ -1,5 +1,8 @@
 package textools.commands;
 
+import textools.ActionTask;
+import textools.tasks.FileSystemTasks;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.DirectoryStream;
@@ -7,14 +10,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-import textools.Command;
-import textools.cop.Offense;
-import textools.tasks.FileSystemTasks;
-
 import static textools.Constants.NOT_FOUND;
 import static textools.tasks.ConsoleTasks.askString;
 
-public class Texniccenter implements Command {
+public class TexnicCenter implements ActionTask {
 
     @Override
     public String getName() {
@@ -26,18 +25,12 @@ public class Texniccenter implements Command {
         return "generates the texniccenter project files";
     }
 
-    @Override
     public void execute() {
         FileSystemTasks tasks = new FileSystemTasks();
 
         String texFile = askString("enter name of main tex file", "main");
 
         tasks.createFile(texFile + ".tcp", getProjectFile(texFile));
-    }
-
-    @Override
-    public List<Offense> run(Path file) {
-        return null;
     }
 
     public String getProjectFile(String name) {

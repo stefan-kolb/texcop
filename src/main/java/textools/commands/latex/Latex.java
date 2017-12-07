@@ -10,7 +10,7 @@ public interface Latex {
 
     void with(String line, int lineNumber, Path file);
 
-    public static void with(List<Path> files, Latex withLatexLine) {
+    static void with(List<Path> files, Latex withLatexLine) {
         for (Path path : files) {
             try {
                 with(path, withLatexLine);
@@ -20,7 +20,7 @@ public interface Latex {
         }
     }
 
-    public static void with(Path file, Latex withLatexLine) {
+    static void with(Path file, Latex withLatexLine) {
         List<String> lines = readFile(file);
         for (int lineNumber = 1; lineNumber <= lines.size(); lineNumber++) {
             String line = lines.get(lineNumber - 1);

@@ -1,5 +1,8 @@
 package textools.commands;
 
+import textools.ActionTask;
+import textools.tasks.FileSystemTasks;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -11,11 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import textools.Command;
-import textools.cop.Offense;
-import textools.tasks.FileSystemTasks;
-
-public class Clean implements Command {
+public class Clean implements ActionTask {
 
     @Override
     public String getName() {
@@ -48,11 +47,6 @@ public class Clean implements Command {
                 throw new IllegalStateException("error during deletion of files", e);
             }
         }
-    }
-
-    @Override
-    public List<Offense> run(Path file) {
-        return null;
     }
 
     private List<String> readGlobExpressions() {

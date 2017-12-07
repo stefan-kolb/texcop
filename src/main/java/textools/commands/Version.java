@@ -1,16 +1,13 @@
 package textools.commands;
 
-import java.nio.file.Path;
-import java.util.List;
-import java.util.ResourceBundle;
+import textools.ActionTask;
 
-import textools.Command;
-import textools.cop.Offense;
+import java.util.ResourceBundle;
 
 /**
  * Prints the current version of textools on the console.
  */
-public class Version implements Command {
+public class Version implements ActionTask {
 
     @Override
     public String getName() {
@@ -26,10 +23,5 @@ public class Version implements Command {
     public void execute() {
         System.out.println("Version: " + ResourceBundle.getBundle("textools").getString("version"));
         System.out.println("Build Date: " + ResourceBundle.getBundle("textools").getString("build.date"));
-    }
-
-    @Override
-    public List<Offense> run(Path file) {
-        return null;
     }
 }

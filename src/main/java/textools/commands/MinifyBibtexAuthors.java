@@ -15,10 +15,11 @@ import org.jbibtex.ParseException;
 import org.jbibtex.StringValue;
 import org.jbibtex.Value;
 import textools.Command;
+import textools.FileTask;
 import textools.cop.Offense;
 import textools.tasks.FileSystemTasks;
 
-public class MinifyBibtexAuthors implements Command {
+public class MinifyBibtexAuthors implements FileTask {
 
     @Override
     public String getName() {
@@ -30,7 +31,6 @@ public class MinifyBibtexAuthors implements Command {
         return "replace three or more authors with et al. in bibtex entries";
     }
 
-    @Override
     public void execute() {
         List<Path> bibtexFiles = new FileSystemTasks().getFilesByExtension(".bib");
 
@@ -48,7 +48,7 @@ public class MinifyBibtexAuthors implements Command {
     }
 
     @Override
-    public List<Offense> run(Path file) {
+    public List<Offense> execute(Path file) {
         return null;
     }
 

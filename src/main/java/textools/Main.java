@@ -1,40 +1,21 @@
 package textools;
 
-import java.io.IOException;
+import textools.commands.*;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import textools.commands.Cites;
-import textools.commands.Clean;
-import textools.commands.CreateGitignore;
-import textools.commands.Help;
-import textools.commands.MinifyBibtexAuthors;
-import textools.commands.MinifyBibtexOptionals;
-import textools.commands.Pdf;
-import textools.commands.PdfClean;
-import textools.commands.PrintLinksSorted;
-import textools.commands.Texlipse;
-import textools.commands.Texniccenter;
-import textools.commands.Validate;
-import textools.commands.ValidateAcronym;
-import textools.commands.ValidateBibtex;
-import textools.commands.ValidateLabels;
-import textools.commands.ValidateLatex;
-import textools.commands.ValidateLinks;
-import textools.commands.Version;
-
 public class Main {
-    private static final Command DEFAULT = new Help();
 
     public static final List<Command> COMMANDS = Stream.of(
             new CreateGitignore(),
             new Clean(),
             new Cites(),
             new Texlipse(),
-            new Texniccenter(),
+            new TexnicCenter(),
             new Validate(),
             new ValidateBibtex(),
             new ValidateLatex(),
@@ -47,12 +28,12 @@ public class Main {
             new ValidateLinks(),
             new Version(),
             new PrintLinksSorted(),
-            DEFAULT
+            new Help()
     ).sorted(Comparator.comparing(Command::getName)).collect(Collectors.toList());
 
-    public static void main(String... args) throws IOException {
+    public static void main(String... args) {
         if (args == null || args.length == 0) {
-            DEFAULT.execute();
+            new Help().execute();
             System.exit(0);
         }
 
@@ -68,7 +49,5 @@ public class Main {
         runner.run();
     }
 
-    private Main() {
-    }
-
+    private Main() {}
 }

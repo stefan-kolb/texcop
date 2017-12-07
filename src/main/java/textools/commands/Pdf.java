@@ -1,18 +1,16 @@
 package textools.commands;
 
-import java.nio.file.Path;
+import textools.ActionTask;
+import textools.Constants;
+import textools.tasks.FileSystemTasks;
+
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import textools.Command;
-import textools.Constants;
-import textools.cop.Offense;
-import textools.tasks.FileSystemTasks;
-
 import static textools.tasks.ConsoleTasks.executeWithLog;
 
-public class Pdf implements Command {
+public class Pdf implements ActionTask {
 
     private static final String TEXTOOLS_PDF_LOG = "textools-pdf.log";
 
@@ -26,7 +24,6 @@ public class Pdf implements Command {
         return "creates pdf with pdflatex, including bibtex; logs to " + TEXTOOLS_PDF_LOG;
     }
 
-    @Override
     public void execute() {
         String mainLatexFile = getMainLatexFileWithoutExtension();
         System.out.println("Using " + mainLatexFile);
@@ -38,11 +35,6 @@ public class Pdf implements Command {
         pdflatex(mainLatexFile);
         pdflatex(mainLatexFile);
         pdflatex(mainLatexFile);
-    }
-
-    @Override
-    public List<Offense> run(Path file) {
-        return null;
     }
 
     private void bibtex(String mainLatexFile) {
@@ -59,7 +51,7 @@ public class Pdf implements Command {
     private String getMainLatexFileWithoutExtension() {
         List<String> mainTexFiles = new ArrayList<>();
         mainTexFiles.add(Texlipse.getMainTexFile(Paths.get(".")));
-        mainTexFiles.add(Texniccenter.getMainTexFile(Paths.get(".")));
+        mainTexFiles.add(TexnicCenter.getMainTexFile(Paths.get(".")));
         mainTexFiles.add(Constants.MAIN_LATEX_FILE);
 
         // remove all NOT_FOUND entries

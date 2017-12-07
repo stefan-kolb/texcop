@@ -1,12 +1,13 @@
 package textools.commands;
 
-import java.nio.file.Path;
-import java.util.List;
-
-import textools.Command;
+import textools.FileTask;
 import textools.cop.Offense;
 
-public class Validate implements Command {
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Validate implements FileTask {
 
     @Override
     public String getName() {
@@ -19,13 +20,10 @@ public class Validate implements Command {
     }
 
     @Override
-    public void execute() {
-        new ValidateBibtex().execute();
-        new ValidateLatex().execute();
-    }
-
-    @Override
-    public List<Offense> run(Path file) {
-        return null;
+    public List<Offense> execute(Path file) {
+        List<Offense> lists = new ArrayList<>();
+        lists.addAll(new ValidateBibtex().execute(file));
+        lists.addAll(new ValidateLatex().execute(file));
+        return lists;
     }
 }

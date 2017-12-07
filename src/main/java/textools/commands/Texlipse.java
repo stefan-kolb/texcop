@@ -1,20 +1,19 @@
 package textools.commands;
 
+import textools.ActionTask;
+import textools.tasks.FileSystemTasks;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-import textools.Command;
-import textools.cop.Offense;
-import textools.tasks.FileSystemTasks;
-
 import static textools.Constants.MAIN_LATEX_FILE;
 import static textools.Constants.NOT_FOUND;
 import static textools.tasks.ConsoleTasks.askString;
 
-public class Texlipse implements Command {
+public class Texlipse implements ActionTask {
 
     private static final String TEXLIPSE_FILE = ".texlipse";
     private static final String ECLIPSE_PROJECT_FILE = ".project";
@@ -29,7 +28,6 @@ public class Texlipse implements Command {
         return "generates texlipse project files";
     }
 
-    @Override
     public void execute() {
         FileSystemTasks tasks = new FileSystemTasks();
 
@@ -39,11 +37,6 @@ public class Texlipse implements Command {
         tasks.createEmptyDirectory("tmp");
         tasks.createFile(ECLIPSE_PROJECT_FILE, getProjectFile(projectName));
         tasks.createFile(TEXLIPSE_FILE, getTexlipseFile(texFile));
-    }
-
-    @Override
-    public List<Offense> run(Path file) {
-        return null;
     }
 
     private String getProjectFile(String name) {

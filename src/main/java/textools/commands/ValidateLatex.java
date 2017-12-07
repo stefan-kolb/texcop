@@ -1,5 +1,11 @@
 package textools.commands;
 
+import textools.FileTask;
+import textools.Formatter;
+import textools.commands.latex.Latex;
+import textools.cop.Location;
+import textools.cop.Offense;
+
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,19 +14,12 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import textools.Command;
-import textools.Formatter;
-import textools.commands.latex.Latex;
-import textools.cop.Location;
-import textools.cop.Offense;
-import textools.tasks.FileSystemTasks;
-
 /**
  * Validates all .tex files within the current directory and its descendants.
  * <p/>
  * Rules adopted by chktex (http://baruch.ev-en.org/proj/chktex/)
  */
-public class ValidateLatex implements Command {
+public class ValidateLatex implements FileTask {
 
     private final Formatter formatter = new Formatter();
 
@@ -35,20 +34,7 @@ public class ValidateLatex implements Command {
     }
 
     @Override
-    public void execute() {
-        List<Path> texFiles = new FileSystemTasks().getFilesByExtension(".tex");
-        formatter.started(texFiles.size());
-        Latex.with(texFiles, (line, lineNumber, file) -> {
-            List<Offense> offenses = new ArrayList<>();
-            for (Map.Entry<Pattern, String> entry : COMPILED_RULES.entrySet()) {
-                offenses.addAll(applyPattern(file, lineNumber, line, entry.getKey(), entry.getValue()));
-            }
-            formatter.fileFinished(file, offenses);
-        });
-        formatter.finished(texFiles.size());
-    }
-
-    public List<Offense> run(Path filePath) {
+    public List<Offense> execute(Path filePath) {
         final List<Offense> offenses = new ArrayList<>();
         Latex.with(filePath, (line, lineNumber, file) -> {
             for (Map.Entry<Pattern, String> entry : COMPILED_RULES.entrySet()) {

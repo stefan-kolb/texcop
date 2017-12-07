@@ -1,14 +1,11 @@
 package textools.commands;
 
-import java.nio.file.Path;
-import java.util.List;
-
+import textools.ActionTask;
 import textools.Command;
-import textools.cop.Offense;
 
 import static textools.Main.COMMANDS;
 
-public class Help implements Command {
+public class Help implements ActionTask {
 
     private static final int COMMAND_SHORT_LENGTH = 30;
 
@@ -34,10 +31,5 @@ public class Help implements Command {
             }
             System.out.format("%s%s%n", firstPart, command.getDescription());
         }
-    }
-
-    @Override
-    public List<Offense> run(Path file) {
-        return null;
     }
 }

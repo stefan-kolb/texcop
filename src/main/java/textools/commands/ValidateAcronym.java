@@ -1,20 +1,20 @@
 package textools.commands;
 
-import java.nio.file.Path;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import textools.Command;
+import textools.FileTask;
 import textools.commands.acronym.Acronym;
 import textools.commands.latex.Latex;
 import textools.cop.Offense;
 import textools.tasks.FileSystemTasks;
 
+import java.nio.file.Path;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 /**
  * Find acronyms defined in the acronym package but that are not yet included.
  */
-public class ValidateAcronym implements Command {
+public class ValidateAcronym implements FileTask {
 
     @Override
     public String getName() {
@@ -26,7 +26,6 @@ public class ValidateAcronym implements Command {
         return "detects unmarked acronyms in text";
     }
 
-    @Override
     public void execute() {
         List<Path> texFiles = new FileSystemTasks().getFilesByExtension(".tex");
 
@@ -45,7 +44,7 @@ public class ValidateAcronym implements Command {
     }
 
     @Override
-    public List<Offense> run(Path file) {
+    public List<Offense> execute(Path file) {
         return null;
     }
 }

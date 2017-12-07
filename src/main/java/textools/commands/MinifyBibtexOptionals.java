@@ -15,10 +15,11 @@ import org.jbibtex.BibTeXParser;
 import org.jbibtex.Key;
 import org.jbibtex.ParseException;
 import textools.Command;
+import textools.FileTask;
 import textools.cop.Offense;
 import textools.tasks.FileSystemTasks;
 
-public class MinifyBibtexOptionals implements Command {
+public class MinifyBibtexOptionals implements FileTask {
 
     @Override
     public String getName() {
@@ -30,7 +31,6 @@ public class MinifyBibtexOptionals implements Command {
         return "removes optional keys in bibtex entries";
     }
 
-    @Override
     public void execute() {
         List<Path> bibtexFiles = new FileSystemTasks().getFilesByExtension(".bib");
 
@@ -48,7 +48,7 @@ public class MinifyBibtexOptionals implements Command {
     }
 
     @Override
-    public List<Offense> run(Path file) {
+    public List<Offense> execute(Path file) {
         return null;
     }
 

@@ -1,24 +1,20 @@
 package textools.commands;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.nio.file.Path;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import textools.Command;
+import textools.FileTask;
 import textools.commands.latex.Latex;
 import textools.commands.latex.Link;
 import textools.cop.Offense;
 import textools.tasks.FileSystemTasks;
 
+import java.nio.file.Path;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 /**
  * Find acronyms defined in the acronym package but that are not yet included.
  */
-public class PrintLinksSorted implements Command {
+public class PrintLinksSorted implements FileTask {
 
     @Override
     public String getName() {
@@ -30,7 +26,6 @@ public class PrintLinksSorted implements Command {
         return "prints all used urls";
     }
 
-    @Override
     public void execute() {
         List<Path> texFiles = new FileSystemTasks().getFilesByExtension(".tex");
 
@@ -41,7 +36,7 @@ public class PrintLinksSorted implements Command {
     }
 
     @Override
-    public List<Offense> run(Path file) {
+    public List<Offense> execute(Path file) {
         return null;
     }
 }

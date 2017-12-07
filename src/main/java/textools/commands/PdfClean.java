@@ -1,12 +1,8 @@
 package textools.commands;
 
-import java.nio.file.Path;
-import java.util.List;
+import textools.ActionTask;
 
-import textools.Command;
-import textools.cop.Offense;
-
-public class PdfClean implements Command {
+public class PdfClean implements ActionTask {
 
     @Override
     public String getName() {
@@ -22,10 +18,5 @@ public class PdfClean implements Command {
     public void execute() {
         new Pdf().execute();
         new Clean().execute();
-    }
-
-    @Override
-    public List<Offense> run(Path file) {
-        return null;
     }
 }

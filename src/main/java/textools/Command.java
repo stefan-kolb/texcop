@@ -1,12 +1,6 @@
 package textools;
 
-import java.nio.file.Path;
-import java.util.List;
-
-import textools.cop.Offense;
-
 public interface Command {
-
     /**
      * The name of the command is used to identify it and call it.
      *
@@ -20,11 +14,4 @@ public interface Command {
      * @return the command description
      */
     String getDescription();
-
-    /**
-     * Executes the command.
-     */
-    void execute();
-
-    public List<Offense> run(Path file);
 }

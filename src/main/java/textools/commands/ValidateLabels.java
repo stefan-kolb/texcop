@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import textools.Command;
+import textools.FileTask;
 import textools.commands.latex.Latex;
 import textools.cop.Offense;
 import textools.tasks.FileSystemTasks;
@@ -15,7 +16,7 @@ import textools.tasks.FileSystemTasks;
 /**
  * Find acronyms defined in the acronym package but that are not yet included.
  */
-public class ValidateLabels implements Command {
+public class ValidateLabels implements FileTask {
 
     private static final Pattern LABEL = Pattern.compile("\\\\label\\{(?<label>[^\\}]*)\\}");
     private static final Pattern REF = Pattern.compile("\\\\(ref|[Cc]ref|nameref)\\{(?<ref>[^\\}]*)\\}");
@@ -30,7 +31,6 @@ public class ValidateLabels implements Command {
         return "detects unused labels";
     }
 
-    @Override
     public void execute() {
         List<Path> texFiles = new FileSystemTasks().getFilesByExtension(".tex");
 
@@ -69,7 +69,7 @@ public class ValidateLabels implements Command {
     }
 
     @Override
-    public List<Offense> run(Path file) {
+    public List<Offense> execute(Path file) {
         return null;
     }
 }
