@@ -1,0 +1,14 @@
+Style/EmptyLinesAroundClassBody:
+  Enabled: false
+
+Layout/SpaceBeforeLabel:
+  Enabled: false
+
+Layout/SpaceBefore*:
+  Enabled: false
+
+Layout/NewlineAfterSentence:
+  Enabled: false
+
+validate-latex:
+  Enabled: true

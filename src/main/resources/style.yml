@@ -1,0 +1,14 @@
+Style/SpaceBeforeFootnote:
+  Message: "line starts with footnote"
+  Match:
+    - "^\\\\footnote(\\{|\\[)"
+
+Style/InformalSpeech:
+  Message: "Too informal (thing)"
+  Match:
+    - "((?: t|T)hing(?: |s |\\.|s\\.))"
+
+Style/ExaggeratedSpeech:
+  Message: "Too exaggerated (never)"
+  Match:
+    - " (never) "

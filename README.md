@@ -43,6 +43,17 @@ Requires JDK 8 with JAVA_HOME set to the JDK path!
 	 validate-links               detects malformed and unreachable urls
 	 version                      prints the current version
 
+## Configuration
+
+Via `texcop.yml`.
+
+```yaml
+Copname:
+  Enabled: false
+```
+
+Via inline comments.
+
 ## Works best when
 
 - the citation style is numeric/alphanumeric.

@@ -1,13 +1,14 @@
-package textools.commands;
+package textools.cop.layout;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import textools.FileTask;
-import textools.Formatter;
 import textools.commands.latex.Latex;
-import textools.cop.*;
+import textools.cop.Config;
+import textools.cop.CopConfig;
+import textools.cop.Location;
+import textools.cop.Offense;
 
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -17,22 +18,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 /**
  * Validates all .tex files within the current directory and its descendants.
  * <p/>
  * Rules adopted by chktex (http://baruch.ev-en.org/proj/chktex/)
  */
-public class ValidateLatex implements FileTask {
+public class SpaceBeforeCitation implements FileTask {
 
     private Config config;
-    private List<RegexCop> cops = new ArrayList<>();
-
-    public ValidateLatex() {
-        loadConfig();
-        loadRules();
-    }
 
     @Override
     public String getName() {
@@ -46,15 +40,17 @@ public class ValidateLatex implements FileTask {
 
     @Override
     public List<Offense> execute(Path filePath) {
+        loadConfig();
+
         final List<Offense> offenses = new ArrayList<>();
-
-        for (RegexCop cop : cops) {
-            CopConfig cc = config.forCop(getName());
-            if (cc != null && cc.isEnabled()) {
-                offenses.addAll(cop.execute(filePath));
+        Latex.with(filePath, (line, lineNumber, file) -> {
+            for (Map.Entry<Pattern, String> entry : COMPILED_RULES.entrySet()) {
+                CopConfig cc = config.forCop(getName());
+                if (cc != null && cc.isEnabled()) {
+                    offenses.addAll(applyPattern(file, lineNumber, line, entry.getKey(), entry.getValue()));
+                }
             }
-        }
-
+        });
         return offenses;
     }
 
@@ -138,21 +134,6 @@ public class ValidateLatex implements FileTask {
             config = mapper.readValue(Paths.get(configFile).toFile(), Config.class);
         } catch (Exception e) {
             System.err.println("Error reading .texcop.yml: " + e.getMessage());
-        }
-    }
-
-    private void loadRules() {
-        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        InputStream is = classloader.getResourceAsStream("style.yml");
-
-        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-        try {
-            Config config = mapper.readValue(is, Config.class);
-            for (Map.Entry<String, CopConfig> entry : config.entrySet()) {
-                cops.add(new RegexCop(entry.getKey(), entry.getValue().matches, entry.getValue().message));
-            }
-        } catch (Exception e) {
-            System.err.println("Error reading style.yml: " + e.getMessage());
         }
     }
 

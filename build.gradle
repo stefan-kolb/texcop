@@ -27,6 +27,8 @@ targetCompatibility = 1.8
 
 dependencies {
     compile 'org.jbibtex:jbibtex:1.0.15'
+    compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.3.0'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.2.3'
     testCompile 'junit:junit:4.12'
 }
 
