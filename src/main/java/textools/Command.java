@@ -1,5 +1,10 @@
 package textools;
 
+import java.nio.file.Path;
+import java.util.List;
+
+import textools.cop.Offense;
+
 public interface Command {
 
     /**
@@ -20,4 +25,6 @@ public interface Command {
      * Executes the command.
      */
     void execute();
+
+    public List<Offense> run(Path file);
 }

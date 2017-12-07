@@ -15,6 +15,7 @@ import org.jbibtex.ParseException;
 import org.jbibtex.StringValue;
 import org.jbibtex.Value;
 import textools.Command;
+import textools.cop.Offense;
 import textools.tasks.FileSystemTasks;
 
 public class MinifyBibtexAuthors implements Command {
@@ -44,6 +45,11 @@ public class MinifyBibtexAuthors implements Command {
                 System.out.println("\tError during minification of " + bibtexFile + ". Reason: " + e.getMessage());
             }
         }
+    }
+
+    @Override
+    public List<Offense> run(Path file) {
+        return null;
     }
 
     public void minifyDatabase(BibTeXDatabase database) {

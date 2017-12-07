@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 import textools.Command;
+import textools.cop.Offense;
 import textools.tasks.FileSystemTasks;
 
 import static textools.Constants.NOT_FOUND;
@@ -32,6 +33,11 @@ public class Texniccenter implements Command {
         String texFile = askString("enter name of main tex file", "main");
 
         tasks.createFile(texFile + ".tcp", getProjectFile(texFile));
+    }
+
+    @Override
+    public List<Offense> run(Path file) {
+        return null;
     }
 
     public String getProjectFile(String name) {

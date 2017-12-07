@@ -8,6 +8,7 @@ import java.util.Set;
 import textools.Command;
 import textools.commands.acronym.Acronym;
 import textools.commands.latex.Latex;
+import textools.cop.Offense;
 import textools.tasks.FileSystemTasks;
 
 /**
@@ -43,4 +44,8 @@ public class ValidateAcronym implements Command {
         });
     }
 
+    @Override
+    public List<Offense> run(Path file) {
+        return null;
+    }
 }

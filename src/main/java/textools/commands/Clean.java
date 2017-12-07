@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import textools.Command;
+import textools.cop.Offense;
 import textools.tasks.FileSystemTasks;
 
 public class Clean implements Command {
@@ -47,6 +48,11 @@ public class Clean implements Command {
                 throw new IllegalStateException("error during deletion of files", e);
             }
         }
+    }
+
+    @Override
+    public List<Offense> run(Path file) {
+        return null;
     }
 
     private List<String> readGlobExpressions() {

@@ -1,11 +1,13 @@
 package textools.commands;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 import textools.Command;
 import textools.Constants;
+import textools.cop.Offense;
 import textools.tasks.FileSystemTasks;
 
 import static textools.tasks.ConsoleTasks.executeWithLog;
@@ -36,6 +38,11 @@ public class Pdf implements Command {
         pdflatex(mainLatexFile);
         pdflatex(mainLatexFile);
         pdflatex(mainLatexFile);
+    }
+
+    @Override
+    public List<Offense> run(Path file) {
+        return null;
     }
 
     private void bibtex(String mainLatexFile) {

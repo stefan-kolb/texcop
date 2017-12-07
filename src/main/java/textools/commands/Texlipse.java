@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 import textools.Command;
+import textools.cop.Offense;
 import textools.tasks.FileSystemTasks;
 
 import static textools.Constants.MAIN_LATEX_FILE;
@@ -38,6 +39,11 @@ public class Texlipse implements Command {
         tasks.createEmptyDirectory("tmp");
         tasks.createFile(ECLIPSE_PROJECT_FILE, getProjectFile(projectName));
         tasks.createFile(TEXLIPSE_FILE, getTexlipseFile(texFile));
+    }
+
+    @Override
+    public List<Offense> run(Path file) {
+        return null;
     }
 
     private String getProjectFile(String name) {

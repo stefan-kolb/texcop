@@ -17,6 +17,7 @@ import org.jbibtex.Key;
 import org.jbibtex.ParseException;
 import org.jbibtex.TokenMgrException;
 import textools.Command;
+import textools.cop.Offense;
 import textools.tasks.FileSystemTasks;
 
 public class ValidateBibtex implements Command {
@@ -43,6 +44,11 @@ public class ValidateBibtex implements Command {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    @Override
+    public List<Offense> run(Path file) {
+        return null;
     }
 
     private static Map<String, List<String>> getRequiredFieldsDatabase() {

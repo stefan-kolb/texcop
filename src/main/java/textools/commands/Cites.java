@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 
 import textools.Command;
 import textools.commands.latex.Latex;
+import textools.cop.Offense;
 import textools.tasks.FileSystemTasks;
 
 public class Cites implements Command {
@@ -52,6 +53,11 @@ public class Cites implements Command {
         double avg = Math.round((double) total / count);
 
         System.out.println("Sum [" + total + "], Min [" + min + "], Max [" + max + "], Avg [" + avg + "]");
+    }
+
+    @Override
+    public List<Offense> run(Path file) {
+        return null;
     }
 
     private Map<String, Integer> getCitations() {

@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import textools.Command;
 import textools.commands.latex.Latex;
+import textools.cop.Offense;
 import textools.tasks.FileSystemTasks;
 
 /**
@@ -67,4 +68,8 @@ public class ValidateLabels implements Command {
                 .forEach(label -> System.out.format("referenced label %s is missing%n", label));
     }
 
+    @Override
+    public List<Offense> run(Path file) {
+        return null;
+    }
 }

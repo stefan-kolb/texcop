@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import textools.Command;
 import textools.commands.latex.Latex;
 import textools.commands.latex.Link;
+import textools.cop.Offense;
 import textools.tasks.FileSystemTasks;
 
 /**
@@ -39,4 +40,8 @@ public class PrintLinksSorted implements Command {
         links.stream().map(l -> l.url).sorted().forEach(System.out::println);
     }
 
+    @Override
+    public List<Offense> run(Path file) {
+        return null;
+    }
 }

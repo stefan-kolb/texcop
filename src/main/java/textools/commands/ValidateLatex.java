@@ -48,6 +48,16 @@ public class ValidateLatex implements Command {
         formatter.finished(texFiles.size());
     }
 
+    public List<Offense> run(Path filePath) {
+        final List<Offense> offenses = new ArrayList<>();
+        Latex.with(filePath, (line, lineNumber, file) -> {
+            for (Map.Entry<Pattern, String> entry : COMPILED_RULES.entrySet()) {
+                offenses.addAll(applyPattern(file, lineNumber, line, entry.getKey(), entry.getValue()));
+            }
+        });
+        return offenses;
+    }
+
     private static Map<String, String> getRules() {
         Map<String, String> rules = new HashMap<>();
         rules.put("^\\\\footnote(\\{|\\[)", "line starts with footnote");

@@ -1,6 +1,10 @@
 package textools.commands;
 
+import java.nio.file.Path;
+import java.util.List;
+
 import textools.Command;
+import textools.cop.Offense;
 
 import static textools.Main.COMMANDS;
 
@@ -30,5 +34,10 @@ public class Help implements Command {
             }
             System.out.format("%s%s%n", firstPart, command.getDescription());
         }
+    }
+
+    @Override
+    public List<Offense> run(Path file) {
+        return null;
     }
 }
