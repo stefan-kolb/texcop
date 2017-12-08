@@ -9,7 +9,7 @@ Style/InformalLanguage:
     - "((?: t|T)hing(?: |s |\\.|s\\.))"
 
 Style/ExaggeratedSpeech:
-  Message: "Too exaggerated (never)"
+  Message: "Too exaggerated wording"
   Match:
     - " (never) "
     - " (always) "

@@ -54,6 +54,11 @@ Copname:
 
 Via inline comments.
 
+```
+% texcop:disable Style/AmericanEnglish, Style/KeyboardWarrior
+Lorem ipsum dolor sit amet.
+% texcop:enable Style/AmericanEnglish, Style/KeyboardWarrior
+```
 ## Works best when
 
 - the citation style is numeric/alphanumeric.

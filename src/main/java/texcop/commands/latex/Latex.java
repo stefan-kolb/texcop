@@ -24,9 +24,9 @@ public interface Latex {
         List<String> lines = readFile(file);
         for (int lineNumber = 1; lineNumber <= lines.size(); lineNumber++) {
             String line = lines.get(lineNumber - 1);
-            if (line.startsWith("%")) {
-                continue;
-            }
+//            if (line.startsWith("%")) {
+//                continue;
+//            }
 
             withLatexLine.with(line, lineNumber, file);
         }
