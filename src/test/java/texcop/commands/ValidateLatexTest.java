@@ -1,45 +1,62 @@
 package texcop.commands;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.junit.Test;
+import texcop.cop.Config;
+import texcop.cop.CopConfig;
+import texcop.cop.Offense;
+import texcop.cop.RegexCop;
 
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
+import java.io.InputStream;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class ValidateLatexTest {
 
+    private List<RegexCop> cops = new ArrayList<>();
+
+    private void loadRules() {
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        InputStream is = classloader.getResourceAsStream("texcop/cop/style/rules.yml");
+
+        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+        try {
+            Config config = mapper.readValue(is, Config.class);
+            for (Map.Entry<String, CopConfig> entry : config.entrySet()) {
+                cops.add(new RegexCop(entry.getKey(), entry.getValue().matches, entry.getValue().message));
+            }
+        } catch (Exception e) {
+            System.err.println("Error reading rules.yml: " + e.getMessage());
+        }
+    }
+
     @Test
     public void testRules() throws Exception {
-        List<String> lines = Files.readAllLines(Paths.get("src/test/resources/errors.tex"), StandardCharsets.UTF_8);
-
-        Map<Pattern, String> compiledRules = ValidateLatex.COMPILED_RULES;
+        loadRules();
+        Path errorFile = Paths.get("src/test/resources/errors.tex");
 
         Set<String> matchedRules = new HashSet<>();
 
-        for (int i = 0; i < lines.size(); i++) {
-            String line = lines.get(i);
+        List<String> violatedRules = new ArrayList<>();
+        for (RegexCop entry : cops) {
 
-            List<String> violatedRules = new ArrayList<>();
-            for (Map.Entry<Pattern, String> entry : compiledRules.entrySet()) {
-
-                Matcher matcher = entry.getKey().matcher(line);
-                while (matcher.find()) {
-                    violatedRules.add(entry.getValue());
-                    matchedRules.add(entry.getValue());
-                }
-
+            List<Offense> offenses = entry.execute(errorFile);
+            if (!offenses.isEmpty()) {
+                violatedRules.add(entry.getName());
+                matchedRules.add(entry.getName());
             }
-
-            final int lineNumber = i + 1;
-            assertEquals("line #" + lineNumber + " violates rules " + violatedRules, 1, violatedRules.size());
         }
 
-        Set<String> untestedRules = new HashSet<>(compiledRules.values());
+        assertTrue(violatedRules.size() > 0);
+
+
+        Set<String> untestedRules = cops.stream().map(e -> e.getName()).collect(Collectors.toSet());
         untestedRules.removeAll(matchedRules);
 
         assertEquals(new HashSet<String>(), untestedRules);

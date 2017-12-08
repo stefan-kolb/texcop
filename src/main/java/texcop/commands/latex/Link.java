@@ -45,7 +45,7 @@ public class Link {
     public final Path file;
     public final Location location;
 
-    public Link(String url, Path file,Location location) {
+    public Link(String url, Path file, Location location) {
         this.url = url.replace("\\#","#"); // replace some things
         this.location = location;
         this.file = file;

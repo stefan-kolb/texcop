@@ -1,14 +1,98 @@
-Style/SpaceBeforeFootnote:
-  Message: "line starts with footnote"
+Style/InformalLanguage:
+  Message: "Use of informal language"
   Match:
-    - "^\\\\footnote(\\{|\\[)"
-
-Style/InformalSpeech:
-  Message: "Too informal (thing)"
-  Match:
+    - "((?: t|T)hing(?: |s |\\.|s\\.))"
+    - " a bit "
+    - "( a|A) lot of "
+    - "( a|A) couple of "
+    - " till "
     - "((?: t|T)hing(?: |s |\\.|s\\.))"
 
 Style/ExaggeratedSpeech:
   Message: "Too exaggerated (never)"
   Match:
     - " (never) "
+    - " (always) "
+
+Style/CommaAfterAbbreviation:
+  Message: "Use a comma after the abbreviation"
+  Match:
+    - "e\\.g\\.[^,]"
+    - "i\\.e\\.[^,]"
+
+Style/StartOfLine:
+  Message: "Unexpected start of line"
+  Match:
+    - "^\\\\footnote(\\{|\\[)"
+
+Style/AvoidLineBreak:
+  Message: "Use ~ instead of space to avoid a line break"
+  Match:
+    - "\\[(pp|p)\\. [0-9]+\\]"
+    - "[^~]\\\\ref"
+    - "[^~\\{\\}]\\\\cite[^tp]"
+    - "et\\ al\\."
+    - "(Java|activiti|camunda~BPM|ODE) \\d+"
+
+Style/SpellingMistakes:
+  Message: "Avoid typical spelling mistakes"
+  Match:
+    - "et\\. al\\."
+    - "\\b[Tt]eh\\b"
+
+Style/KeyboardWarrior:
+  Message: "Typical Keyboard typos"
+  Match:
+    - ",,"
+
+Style/NoSpaceBefore:
+  Message: "Remove preceding space"
+  Match:
+    - "[ ],"
+    - " \\\\label\\{"
+    - " \\\\footnote(\\{|\\[)"
+
+Style/AmericanEnglish:
+  Message: "Use American English instead of British English"
+  Match:
+    - "behaviour"
+
+Style/Footnote:
+  Message: "Remove unnecessary referential words"
+  Match:
+    - "\\\\footnote\\{See \\\\url\\{[^\\}]+\\}\\}"
+
+Style/SpellNumbers:
+  Message: "Spell numbers from zero to nine"
+  Match:
+    - "[0-9]%"
+
+Style/SimonHarrer:
+  Message: "Simon Harrer's style set"
+  Match:
+    - "But "
+    - "(While|, while) "
+    - "''\\."
+    - "[Bb]ecause of this"
+    - "\\b(from| in|and|with|see|In|From|With|And|See)( |~)\\\\cite[^t]"
+    - "cf\\.[^\\\\]"
+    - "(All|The|Of|all|the|of)( |~)[0-9][^0-9]"
+    - "\\b[Nn]on[- ]"
+    - "(In|in) order to"
+    - "(all of the) "
+    - "Tt "
+
+Latex/AcronymInsideCaption:
+  Message: "Do not use acronyms inside captions"
+  Match:
+    - "\\\\caption\\{.*\\\\ac\\{"
+
+Style/CiteBeforePeriod:
+  Message: "Use cite before the period"
+  Match:
+    - "(?<!et( |~)al)\\.~?\\\\cite"
+
+Style/CapitalizeWords:
+  Message: "Capitalize words"
+  Match:
+    - "(table|figure|section|listing|chapter|theorem|corollary|definition)~\\\\ref"
