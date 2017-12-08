@@ -1,6 +1,6 @@
-# textools [![Build Status](https://travis-ci.org/stefan-kolb/textools.svg?branch=master)](https://travis-ci.org/stefan-kolb/textools) 
+# TexCop [![Build Status](https://travis-ci.org/stefan-kolb/texcop.svg?branch=master)](https://travis-ci.org/stefan-kolb/texcop) 
 
-Textools provides CLI commands for the most commonly used tasks when working with [LaTeX](http://www.latex-project.org/),
+TexCop provides CLI commands for the most commonly used tasks when working with [LaTeX](http://www.latex-project.org/),
 e.g., generating a `.gitignore` file, creating the final pdf and validating the `.tex` and `.bib` files.
 
 **Only** works for UTF-8 encoded `.tex` and `.bib` files.
@@ -9,21 +9,21 @@ e.g., generating a `.gitignore` file, creating the final pdf and validating the 
 
 Requires JDK 8 with JAVA_HOME set to the JDK path!
 
-    $ git clone https://github.com/simonharrer/textools.git
-    $ cd textools
+    $ git clone https://github.com/simonharrer/texcop.git
+    $ cd texcop
     $ ./gradlew installDist
-    # add textools/build/install/textools/bin to PATH
+    # add texcop/build/install/texcop/bin to PATH
 
 ## Usage
 
     # in your latex directory
-    $ textools pdf # create the pdf with pdflatex and bibtex using main.tex as the starting file
-    $ textools validate # validates all .tex and .bib files using Simon's validation rules
-    $ textools clean # remove all generated files like .div, .pdf, .log, ...
+    $ texcop pdf # create the pdf with pdflatex and bibtex using main.tex as the starting file
+    $ texcop validate # validates all .tex and .bib files using Simon's validation rules
+    $ texcop clean # remove all generated files like .div, .pdf, .log, ...
 
 ## Commands
 
-	textools [command]
+	texcop [command]
 	
 	 cites                        Print used cites
 	 clean                        Removes all generated files during a tex build
@@ -31,7 +31,7 @@ Requires JDK 8 with JAVA_HOME set to the JDK path!
 	 help                         prints usage information
 	 minify-bibtex-authors        replace three or more authors with et al. in bibtex entries
 	 minify-bibtex-optionals      removes optional keys in bibtex entries
-	 pdf                          creates pdf with pdflatex, including bibtex; logs to textools-pdf.log
+	 pdf                          creates pdf with pdflatex, including bibtex; logs to texcop-pdf.log
 	 pdfclean                     executes pdf and clean commands in sequence
 	 texlipse                     generates texlipse project files
 	 texniccenter                 generates the texniccenter project files
@@ -45,7 +45,7 @@ Requires JDK 8 with JAVA_HOME set to the JDK path!
 
 ## Configuration
 
-Via `texcop.yml`.
+Via `.texcop.yml`.
 
 ```yaml
 Copname:
@@ -60,3 +60,7 @@ Via inline comments.
 - each sentence is in its own line.
 - labels in tables/figures should be put right after the caption
 - all files are in UTF-8
+
+## Credits
+
+Inspired by [Rubocop](https://github.com/bbatsov/rubocop). Based on [Textools](https://github.com/simonharrer/textools).

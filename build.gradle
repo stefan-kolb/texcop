@@ -12,7 +12,7 @@ repositories {
     jcenter()
 }
 
-mainClassName = "textools.Main"
+mainClassName = "texcop.Main"
 
 import org.apache.tools.ant.filters.*
 
