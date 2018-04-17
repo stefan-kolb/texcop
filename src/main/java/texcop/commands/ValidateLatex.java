@@ -59,6 +59,7 @@ public class ValidateLatex implements FileTask {
 
         if (!Files.exists(Paths.get(configFile))) {
             config = new Config();
+            return;
         }
 
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
