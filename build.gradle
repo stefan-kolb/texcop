@@ -1,7 +1,7 @@
 // to update the gradle wrapper, execute
 // ./gradlew wrapper --gradle-version=4.6 --distribution-type=bin
 plugins {
-    id "com.simonharrer.modernizer" version "1.5.0-1"
+    id "com.simonharrer.modernizer" version "1.6.0-1"
     id "net.ltgt.errorprone" version "0.0.13"
     id "one.util.huntbugs" version "0.3.5"
 }
