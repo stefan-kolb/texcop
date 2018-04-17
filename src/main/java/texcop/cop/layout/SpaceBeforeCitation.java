@@ -1,23 +1,19 @@
 package texcop.cop.layout;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import texcop.FileTask;
-import texcop.commands.latex.Latex;
-import texcop.cop.Config;
-import texcop.cop.CopConfig;
-import texcop.cop.Location;
-import texcop.cop.Offense;
-
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import texcop.FileTask;
+import texcop.commands.latex.Latex;
+import texcop.cop.Config;
+import texcop.cop.CopConfig;
+import texcop.cop.Location;
+import texcop.cop.Offense;
 
 /**
  * Validates all .tex files within the current directory and its descendants.
@@ -40,7 +36,7 @@ public class SpaceBeforeCitation implements FileTask {
 
     @Override
     public List<Offense> execute(Path filePath) {
-        loadConfig();
+        config = Config.load();
 
         final List<Offense> offenses = new ArrayList<>();
         Latex.with(filePath, (line, lineNumber, file) -> {
@@ -121,21 +117,6 @@ public class SpaceBeforeCitation implements FileTask {
     }
 
     public static final Map<Pattern, String> COMPILED_RULES = getCompiledRules();
-
-    private void loadConfig() {
-        final String configFile = ".texcop.yml";
-
-        if (!Files.exists(Paths.get(configFile))) {
-            config = new Config();
-        }
-
-        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-        try {
-            config = mapper.readValue(Paths.get(configFile).toFile(), Config.class);
-        } catch (Exception e) {
-            System.err.println("Error reading .texcop.yml: " + e.getMessage());
-        }
-    }
 
     private List<Offense> applyPattern(Path texFile, int lineNumber, String line, Pattern pattern, String message) {
         List<Offense> offenses = new ArrayList<>();

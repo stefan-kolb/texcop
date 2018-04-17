@@ -1,19 +1,18 @@
 package texcop.commands;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import texcop.FileTask;
-import texcop.cop.*;
-
 import java.io.InputStream;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import texcop.FileTask;
+import texcop.cop.Config;
+import texcop.cop.CopConfig;
+import texcop.cop.Offense;
+import texcop.cop.RegexCop;
 
 /**
  * Validates all .tex files within the current directory and its descendants.
@@ -26,7 +25,7 @@ public class ValidateLatex implements FileTask {
     private List<RegexCop> cops = new ArrayList<>();
 
     public ValidateLatex() {
-        loadConfig();
+        config = Config.load();
         loadRules();
     }
 
@@ -52,22 +51,6 @@ public class ValidateLatex implements FileTask {
         }
 
         return offenses;
-    }
-
-    private void loadConfig() {
-        final String configFile = ".texcop.yml";
-
-        if (!Files.exists(Paths.get(configFile))) {
-            config = new Config();
-            return;
-        }
-
-        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-        try {
-            config = mapper.readValue(Paths.get(configFile).toFile(), Config.class);
-        } catch (Exception e) {
-            System.err.println("Error reading .texcop.yml: " + e.getMessage());
-        }
     }
 
     private void loadRules() {

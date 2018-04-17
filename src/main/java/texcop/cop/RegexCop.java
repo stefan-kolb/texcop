@@ -54,7 +54,7 @@ public class RegexCop implements FileTask {
 
             if (!disabled) {
                 for (Pattern pattern : matches) {
-                    offenses.addAll(applyPattern(line, lineNumber, pattern, message));
+                    offenses.addAll(applyPattern(line, lineNumber, pattern, message, name));
                 }
             }
         });
@@ -89,7 +89,7 @@ public class RegexCop implements FileTask {
         return line.startsWith("%");
     }
 
-    private List<Offense> applyPattern(String line, int lineNumber, Pattern pattern, String message) {
+    private List<Offense> applyPattern(String line, int lineNumber, Pattern pattern, String message, String copName) {
         List<Offense> offenses = new ArrayList<>();
         Matcher matcher = pattern.matcher(line);
         while (matcher.find()) {
@@ -107,7 +107,7 @@ public class RegexCop implements FileTask {
             }
 
             Location location = new Location(line, lineNumber, column, length);
-            offenses.add(new Offense(location, message));
+            offenses.add(new Offense(location, message, copName));
         }
         return offenses;
     }

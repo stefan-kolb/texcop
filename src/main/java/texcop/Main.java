@@ -45,6 +45,9 @@ public class Main {
         if (arguments.contains("-F") || arguments.contains("--fail-fast")) {
             runner.setFailFast(true);
         }
+        if (arguments.contains("--auto-gen-config")) {
+            runner.generateConfig(true);
+        }
 
         runner.run();
     }

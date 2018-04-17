@@ -14,6 +14,10 @@ public class CopConfig {
     @JsonProperty("Match")
     public List<String> matches;
 
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     public boolean isEnabled() {
         return enabled;
     }
