@@ -55,7 +55,6 @@ public class ValidateLatexTest {
 
         assertTrue(violatedRules.size() > 0);
 
-
         Set<String> untestedRules = cops.stream().map(e -> e.getName()).collect(Collectors.toSet());
         untestedRules.removeAll(matchedRules);
 

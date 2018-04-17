@@ -15,6 +15,7 @@ public class CreateGitignore implements ActionTask {
         return "creates a latex project specific .gitignore file";
     }
 
+    @Override
     public void execute() {
         // cannot reference .gitignore files within a jar
         new FileSystemTasks().copyResourceToFile("tex.gitignore", ".gitignore");

@@ -24,6 +24,7 @@ public class Pdf implements ActionTask {
         return "creates pdf with pdflatex, including bibtex; logs to " + TEXTOOLS_PDF_LOG;
     }
 
+    @Override
     public void execute() {
         String mainLatexFile = getMainLatexFileWithoutExtension();
         System.out.println("Using " + mainLatexFile);

@@ -59,6 +59,13 @@ Via inline comments.
 Lorem ipsum dolor sit amet.
 % texcop:enable Style/AmericanEnglish, Style/KeyboardWarrior
 ```
+
+### Automatically Generated Configuration
+
+For the first run of texcop it is a good idea to use `texcop --auto-gen-config` to generate the `.texcop.yml` file including all found offenses. 
+The generated file includes configuration that disables all cops that currently detect an offense in the code. 
+After that, you can start removing the disabled cops from the generated file one by one to work through them independently and not get overwhelmed by the amount of initial offenses.
+    
 ## Works best when
 
 - the citation style is numeric/alphanumeric.
