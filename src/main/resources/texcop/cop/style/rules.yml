@@ -87,6 +87,11 @@ Latex/AcronymInsideCaption:
   Match:
     - "\\\\caption\\{.*\\\\ac\\{"
 
+Latex/WrapUrl:
+  Message: "Wrap URLs inside \url command"
+  Match:
+    - "(?<!\\\\url\\{)(https?|ftp)://[^\\s/$.?#].[^\\s]*"
+
 Style/CiteBeforePeriod:
   Message: "Use cite before the period"
   Match:
