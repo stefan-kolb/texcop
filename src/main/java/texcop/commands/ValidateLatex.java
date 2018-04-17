@@ -45,8 +45,8 @@ public class ValidateLatex implements FileTask {
         final List<Offense> offenses = new ArrayList<>();
 
         for (RegexCop cop : cops) {
-            CopConfig cc = config.forCop(getName());
-            if (cc != null && cc.isEnabled()) {
+            CopConfig cc = config.forCop(cop.getName());
+            if (cc == null || cc.isEnabled()) {
                 offenses.addAll(cop.execute(filePath));
             }
         }
