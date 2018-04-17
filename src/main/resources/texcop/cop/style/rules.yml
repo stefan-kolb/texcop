@@ -52,6 +52,11 @@ Style/NoSpaceBefore:
     - " \\\\label\\{"
     - " \\\\footnote(\\{|\\[)"
 
+Style/NoPeriodAfter:
+  Message: "Remove succeeding period"
+  Match:
+    - "\\\\footnote\\{\\\\url\\{[^\\}]+\\}\\.\\}"
+
 Style/AmericanEnglish:
   Message: "Use American English instead of British English"
   Match:
