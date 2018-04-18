@@ -90,9 +90,9 @@ buildscript {
 }
 
 task texCop(type: JavaExec) {
-	classpath = buildscript.configurations.classpath
+    classpath = buildscript.configurations.classpath
     main = "texcop.Main"
-	args 'validate-latex'
+    args 'validate-latex'
 } 
 
 //task texCop(type: Validation)
