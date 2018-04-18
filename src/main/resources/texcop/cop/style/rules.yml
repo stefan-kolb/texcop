@@ -92,6 +92,11 @@ Latex/AcronymInsideCaption:
   Match:
     - "\\\\caption\\{.*\\\\ac\\{"
 
+Latex/Avoid:
+  Message: "Avoid $$ shorthand as it may cause problems, particularly with the AMS-LaTeX macros"
+  Match:
+    - "\\${2,2}.*?\\${2,2}"
+
 Latex/WrapUrl:
   Message: "Wrap URLs inside \\url command"
   Match:
