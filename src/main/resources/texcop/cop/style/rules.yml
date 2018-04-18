@@ -98,7 +98,7 @@ Latex/Avoid:
     - "\\${2,2}.*?\\${2,2}"
 
 Math/Dots:
-  Message: "Use \\dots for ellipsis in math mode"
+  Message: "Use \\dots* for ellipsis in math mode, e.g., \\dotsc"
   Match:
     - "(?:\\$|\\\\\\(|\\\\\\[).*?(\\.\\.\\.).*?(?:\\$|\\\\\\)|\\\\\\])"
 
