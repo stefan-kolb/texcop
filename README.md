@@ -11,7 +11,7 @@ e.g., generating a `.gitignore` file, creating the final pdf and validating the 
 
 Requires JDK 8 with JAVA_HOME set to the JDK path!
 
-    $ git clone https://github.com/simonharrer/texcop.git
+    $ git clone https://github.com/stefan-kolb/texcop.git
     $ cd texcop
     $ ./gradlew installDist
     # add texcop/build/install/texcop/bin to PATH
