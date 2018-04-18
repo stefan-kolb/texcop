@@ -97,6 +97,11 @@ Latex/Avoid:
   Match:
     - "\\${2,2}.*?\\${2,2}"
 
+Math/Dots:
+  Message: "Use \\dots for ellipsis in math mode"
+  Match:
+    - "(?:\\$|\\\\\\(|\\\\\\[).*?(\\.\\.\\.).*?(?:\\$|\\\\\\)|\\\\\\])"
+
 Latex/WrapUrl:
   Message: "Wrap URLs inside \\url command"
   Match:
