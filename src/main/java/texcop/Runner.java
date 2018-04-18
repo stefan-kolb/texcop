@@ -31,16 +31,17 @@ public class Runner {
         Runner.generateConfig = generateConfig;
     }
 
-    public void run() {
+    public int run() {
         Command command = findCommandByName(commandName);
 
         // run actions
         if (command instanceof ActionTask) {
             ((ActionTask) command).execute();
-            return;
+            return 0;
         }
 
         // run inspections
+        boolean offensesFound = false;
         try {
             List<Path> texFiles = new FileSystemTasks().getFilesByExtension(".tex");
             Config config = new Config();
@@ -51,8 +52,12 @@ public class Runner {
                 inspectedFiles++;
                 formatter.fileFinished(file, offenses);
 
-                if (!offenses.isEmpty() && failFast) {
-                    break;
+                if (!offenses.isEmpty()) {
+                    offensesFound = true;
+
+                    if (failFast) {
+                        break;
+                    }
                 }
 
                 if (generateConfig) {
@@ -69,9 +74,12 @@ public class Runner {
                 config.save();
             }
             formatter.finished(inspectedFiles);
+
+            return offensesFound ? 1 : 0;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
+            return 2;
         }
     }
 

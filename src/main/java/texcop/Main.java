@@ -66,7 +66,7 @@ public class Main {
             runner.generateConfig(true);
         }
 
-        runner.run();
+        System.exit(runner.run());
     }
 
     private Main() {}

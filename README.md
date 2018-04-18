@@ -67,6 +67,37 @@ Lorem ipsum dolor sit amet.
 For the first run of texcop it is a good idea to use `texcop --auto-gen-config` to generate the `.texcop.yml` file including all found offenses. 
 The generated file includes configuration that disables all cops that currently detect an offense in the code. 
 After that, you can start removing the disabled cops from the generated file one by one to work through them independently and not get overwhelmed by the amount of initial offenses.
+
+### Usage with CI
+
+Running texcop will return a system status code different from zero if any offenses were found.
+Therefore, you can use it with a CI server like Travis or CircleCI.
+You may use the following `build.gradle` file for now.
+The build will fail, if there are any style violations detected.
+
+```gradle
+apply plugin: 'java'
+
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'https://jitpack.io' }
+    }
+
+    dependencies {
+        classpath 'com.github.stefan-kolb:texcop:master-SNAPSHOT'
+    }
+}
+
+task texCop(type: JavaExec) {
+	classpath = buildscript.configurations.classpath
+    main = "texcop.Main"
+	args 'validate-latex'
+} 
+
+//task texCop(type: Validation)
+test.dependsOn texCop
+``` 
     
 ## Works best when
 
