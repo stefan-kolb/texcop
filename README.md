@@ -1,5 +1,7 @@
 # TexCop [![Build Status](https://travis-ci.org/stefan-kolb/texcop.svg?branch=master)](https://travis-ci.org/stefan-kolb/texcop) 
 
+CLI and static code analyzer for TeX files.
+
 TexCop provides CLI commands for the most commonly used tasks when working with [LaTeX](http://www.latex-project.org/),
 e.g., generating a `.gitignore` file, creating the final pdf and validating the `.tex` and `.bib` files.
 
