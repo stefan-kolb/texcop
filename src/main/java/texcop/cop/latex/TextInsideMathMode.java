@@ -13,11 +13,12 @@ import texcop.cop.Location;
 import texcop.cop.Offense;
 
 /**
- * TODO: detect other math environments than $$
+ * TODO: detect standard environments such as math
+ * https://en.wikibooks.org/wiki/LaTeX/Mathematics#Mathematics_environments
  */
 public class TextInsideMathMode implements FileTask {
     private static final String MESSAGE = "Use \\mathit, \\text or \\textnormal for multiletter words in math mode";
-    private static final Pattern MATH_MODE = Pattern.compile("\\$(.*?)\\$");
+    private static final Pattern MATH_MODE = Pattern.compile("(?:\\$|\\\\\\(|\\\\\\[)(.*?)(?:\\$|\\\\\\)|\\\\\\])");
     private static final Pattern MULTILETTER = Pattern.compile("\\\\[a-zA-z]+\\{.*?}|\\\\[a-zA-z]+|([a-zA-Z]{2,})");
 
     private Config config;

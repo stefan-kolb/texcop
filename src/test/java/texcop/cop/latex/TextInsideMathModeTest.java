@@ -35,8 +35,20 @@ public class TextInsideMathModeTest {
     }
 
     @Test
-    public void dollarMathEnvironment() {
+    public void texInlineShorthandEnvironment() {
         List<Offense> offenses = cop.applyPattern(null, 0, "$f(x) = undefined$");
+        assertEquals(1, offenses.size());
+    }
+
+    @Test
+    public void latexInlineShorthandEnvironment() {
+        List<Offense> offenses = cop.applyPattern(null, 0, "\\(f(x) = undefined$\\)");
+        assertEquals(1, offenses.size());
+    }
+
+    @Test
+    public void latexEquationShorthandEnvironment() {
+        List<Offense> offenses = cop.applyPattern(null, 0, "\\[f(x) = undefined$\\]");
         assertEquals(1, offenses.size());
     }
 
