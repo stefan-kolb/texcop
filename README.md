@@ -64,7 +64,7 @@ Lorem ipsum dolor sit amet.
 
 ### Automatically Generated Configuration
 
-For the first run of texcop it is a good idea to use `texcop --auto-gen-config` to generate the `.texcop.yml` file including all found offenses. 
+For the first run of texcop it is a good idea to use `texcop validate --auto-gen-config` to generate the `.texcop.yml` file including all found offenses. 
 The generated file includes configuration that disables all cops that currently detect an offense in the code. 
 After that, you can start removing the disabled cops from the generated file one by one to work through them independently and not get overwhelmed by the amount of initial offenses.
 
