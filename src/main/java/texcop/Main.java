@@ -1,12 +1,29 @@
 package texcop;
 
-import texcop.commands.*;
-
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import texcop.commands.Cites;
+import texcop.commands.Clean;
+import texcop.commands.CreateGitignore;
+import texcop.commands.Help;
+import texcop.commands.MinifyBibtexAuthors;
+import texcop.commands.MinifyBibtexOptionals;
+import texcop.commands.Pdf;
+import texcop.commands.PdfClean;
+import texcop.commands.PrintLinksSorted;
+import texcop.commands.Texlipse;
+import texcop.commands.TexnicCenter;
+import texcop.commands.Validate;
+import texcop.commands.ValidateAcronym;
+import texcop.commands.ValidateBibtex;
+import texcop.commands.ValidateLabels;
+import texcop.commands.ValidateLatex;
+import texcop.commands.ValidateLinks;
+import texcop.commands.Version;
 
 public class Main {
 

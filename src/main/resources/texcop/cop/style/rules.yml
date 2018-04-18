@@ -92,11 +92,6 @@ Latex/AcronymInsideCaption:
   Match:
     - "\\\\caption\\{.*\\\\ac\\{"
 
-Latex/TextInsideMathMode:
-  Message: "Use \\mathit, \\text or \\textnormal for multiletter words in math mode"
-  Match:
-    - "\\$.*?([a-zA-Z]{2,}).*?\\$"
-
 Latex/WrapUrl:
   Message: "Wrap URLs inside \\url command"
   Match:

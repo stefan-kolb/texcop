@@ -13,6 +13,7 @@ import texcop.cop.Config;
 import texcop.cop.CopConfig;
 import texcop.cop.Offense;
 import texcop.cop.RegexCop;
+import texcop.cop.latex.TextInsideMathMode;
 
 /**
  * Validates all .tex files within the current directory and its descendants.
@@ -22,10 +23,11 @@ import texcop.cop.RegexCop;
 public class ValidateLatex implements FileTask {
 
     private Config config;
-    private List<RegexCop> cops = new ArrayList<>();
+    private List<FileTask> cops = new ArrayList<>();
 
     public ValidateLatex() {
         config = Config.load();
+        loadCops();
         loadRules();
     }
 
@@ -43,7 +45,7 @@ public class ValidateLatex implements FileTask {
     public List<Offense> execute(Path filePath) {
         final List<Offense> offenses = new ArrayList<>();
 
-        for (RegexCop cop : cops) {
+        for (FileTask cop : cops) {
             CopConfig cc = config.forCop(cop.getName());
             if (cc == null || cc.isEnabled()) {
                 offenses.addAll(cop.execute(filePath));
@@ -68,4 +70,8 @@ public class ValidateLatex implements FileTask {
         }
     }
 
+    private void loadCops() {
+        // TODO maybe use reflection later
+        cops.add(new TextInsideMathMode());
+    }
 }

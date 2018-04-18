@@ -30,7 +30,8 @@ public class Formatter {
         offensesCount++;
 
         System.out.format("%s:%d:%d: %s%n", FileSystemTasks.workingDirectory.relativize(filePath), offense.location.line, offense.location.column, offense.message);
-        System.out.format("%s%n", offense.location.sourceLine);
+        // FIXME: display tabs as 1 char to get correct error alignment
+        System.out.format("%s%n", offense.location.sourceLine.replace("\t", " "));
         if (offense.location.column != 0) {
             System.out.format("%" + offense.location.column + "s%s\n", "", String.join("", Collections.nCopies(offense.location.length, "^")));
         } else {
