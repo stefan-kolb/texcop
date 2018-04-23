@@ -41,6 +41,11 @@ public class ValidateBibtex implements FileTask {
         return offenses;
     }
 
+    @Override
+    public String getFileExtension() {
+        return ".bib";
+    }
+
     private static Map<String, List<String>> getRequiredFieldsDatabase() {
         Map<String, List<String>> result = new HashMap<>();
 

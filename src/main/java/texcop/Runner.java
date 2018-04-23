@@ -41,14 +41,15 @@ public class Runner {
         }
 
         // run inspections
+        FileTask inspection = (FileTask) command;
         boolean offensesFound = false;
         try {
-            List<Path> texFiles = new FileSystemTasks().getFilesByExtension(".tex");
+            List<Path> texFiles = new FileSystemTasks().getFilesByExtension(inspection.getFileExtension());
             Config config = new Config();
 
             formatter.started(texFiles.size());
             for (Path file: texFiles) {
-                List<Offense> offenses = ((FileTask) command).execute(file);
+                List<Offense> offenses = inspection.execute(file);
                 inspectedFiles++;
                 formatter.fileFinished(file, offenses);
 

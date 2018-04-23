@@ -102,7 +102,8 @@ test.dependsOn texCop
 - the citation style is numeric/alphanumeric.
 - each sentence is in its own line.
 - labels in tables/figures should be put right after the caption
-- all files are in UTF-8
+- does not work that well if you define a lot of custom macros for abbreviating latex commands
+- all files are in UTF-8 and use .tex file ending
 
 ## Credits
 
