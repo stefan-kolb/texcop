@@ -45,12 +45,23 @@ Style/KeyboardWarrior:
   Match:
     - ",,"
 
-Style/NoSpaceBefore:
-  Message: "Remove preceding space"
+Style/DoubleSpace:
+  Message: "Double space found"
   Match:
-    - "[ ],"
-    - " \\\\label\\{"
-    - " \\\\footnote(\\{|\\[)"
+    - "\\s~\\s?|\\s?~\\s"
+
+Style/NoSpaceBefore:
+  Message: "Remove preceding whitespace"
+  Match:
+    - "\\s[,!:?\\.\\;:]"
+    - "\\s\\\\label\\{"
+    - "\\s\\\\index\\{"
+    - "\\s\\\\footnote(\\{|\\[)"
+
+Math/Times:
+  Message: "Use $\\times$ instead of x"
+  Match:
+    - "\\d+(x)\\d+"
 
 Style/NoPeriodAfter:
   Message: "Remove succeeding period"
@@ -86,6 +97,11 @@ Style/SimonHarrer:
     - "(In|in) order to"
     - "(all of the) "
     - "Tt "
+
+Latex/MissingBrackets:
+  Message: "Put the parameter into brackets for correct rendering"
+  Match:
+    - "[\\^_]\\w{2,}"
 
 Latex/AcronymInsideCaption:
   Message: "Do not use acronyms inside captions"
