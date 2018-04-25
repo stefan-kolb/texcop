@@ -116,3 +116,14 @@ Style/CapitalizeWords:
   Message: "Capitalize words"
   Match:
     - "(table|figure|section|listing|chapter|theorem|corollary|definition)~\\\\ref"
+
+Spelling/Lowercase:
+  Message: "Word should not be capitalized"
+  Match:
+    # https://english.stackexchange.com/questions/157178/capitals-or-not-for-open-source
+    - "\\s(Open[\\s-]Source)\\b"
+
+Spelling/Uppercase:
+  Message: "Word should be capitalized"
+  Match:
+    - "\\s(docker)\\b"
