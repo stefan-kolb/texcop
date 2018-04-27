@@ -143,3 +143,8 @@ Spelling/Uppercase:
   Message: "Word should be capitalized"
   Match:
     - "\\s(docker)\\b"
+
+Spelling/DuplicateWords:
+  Message: "Duplicate words are often unintended typos"
+  Match:
+    - "\\b(\\w+)\\s+\\1\\b"
