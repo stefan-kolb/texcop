@@ -3,7 +3,7 @@ Math/Times:
   Match:
     - "\\d+(x)\\d+"
 
-Math/Dots:
+Math/Ellipsis:
   Message: "Use \\dots* for ellipsis in math mode, e.g., \\dotsc"
   Match:
     - "(?:\\$|\\\\\\(|\\\\\\[).*?(\\.\\.\\.).*?(?:\\$|\\\\\\)|\\\\\\])"

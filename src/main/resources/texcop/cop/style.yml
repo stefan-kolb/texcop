@@ -34,7 +34,7 @@ Style/SpellingMistakes:
 Style/KeyboardWarrior:
   Message: "Typical keyboard typos"
   Match:
-    - "[,.]{2,}"
+    - "([,])\\1{2,}"
 
 Style/NoPeriodAfter:
   Message: "Remove succeeding period"
@@ -86,3 +86,8 @@ Style/CapitalizeWords:
   Message: "Capitalize words"
   Match:
     - "(table|figure|section|listing|chapter|theorem|corollary|definition)~\\\\ref"
+
+Style/Ellipsis:
+  Message: "Use \\ldots for ellipsis in text mode"
+  Match:
+    - "(\\.{3,3})"
