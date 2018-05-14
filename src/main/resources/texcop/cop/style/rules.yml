@@ -148,4 +148,9 @@ Spelling/Uppercase:
 Spelling/DuplicateWords:
   Message: "Duplicate words are often unintended typos"
   Match:
-    - "\\b(\\w+)\\s+\\1\\b"
+    - "\\b(\\w+)\\s+\\1\\b"Layout/SpaceBefore:
+
+Layout/SpaceBefore:
+  Message: "Add preceding whitespace"
+  Match:
+    - "[^\\s~\\{\\[]\\\\cite\\{"
