@@ -145,10 +145,18 @@ Spelling/Uppercase:
   Match:
     - "\\s(docker)\\b"
 
+# https://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings
 Spelling/DuplicateWords:
   Message: "Duplicate words are often unintended typos"
   Match:
-    - "\\b(\\w+)\\s+\\1\\b"Layout/SpaceBefore:
+    - "\\b(\\w+)\\s+\\1\\b"
+    - " a an "
+    - " a the "
+    - " an a "
+    - " an and "
+    - " the this "
+    - " are been "
+    - " was been "
 
 Layout/SpaceBefore:
   Message: "Add preceding whitespace"
