@@ -1,4 +1,27 @@
+Layout/AvoidLineBreak:
+  Message: "Use ~ instead of space to avoid a line break"
+  Match:
+    - "\\[(pp|p)\\. [0-9]+\\]"
+    - "[^~]\\\\ref"
+    - "[^~\\{\\}]\\\\cite[^tp]"
+    - "et\\ al\\."
+    - "\\d+ \\\\%"
+    - "(Java|activiti|camunda~BPM|ODE) \\d+"
+
 Layout/SpaceBefore:
   Message: "Add preceding whitespace"
   Match:
     - "[^\\s~\\{\\[]\\\\cite\\{"
+
+Layout/NoSpaceBefore:
+  Message: "Remove preceding whitespace"
+  Match:
+    - "\\s[,!:?\\.\\;:]"
+    - "\\s\\\\label\\{"
+    - "\\s\\\\index\\{"
+    - "\\s\\\\footnote(\\{|\\[)"
+
+Layout/DoubleSpace:
+  Message: "Double space found"
+  Match:
+    - "\\s~\\s?|\\s?~\\s"

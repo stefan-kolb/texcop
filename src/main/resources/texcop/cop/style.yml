@@ -25,16 +25,6 @@ Style/StartOfLine:
   Match:
     - "^\\\\footnote(\\{|\\[)"
 
-Style/AvoidLineBreak:
-  Message: "Use ~ instead of space to avoid a line break"
-  Match:
-    - "\\[(pp|p)\\. [0-9]+\\]"
-    - "[^~]\\\\ref"
-    - "[^~\\{\\}]\\\\cite[^tp]"
-    - "et\\ al\\."
-    - "\\d+ \\\\%"
-    - "(Java|activiti|camunda~BPM|ODE) \\d+"
-
 Style/SpellingMistakes:
   Message: "Avoid typical spelling mistakes"
   Match:
@@ -42,22 +32,9 @@ Style/SpellingMistakes:
     - "\\b[Tt]eh\\b"
 
 Style/KeyboardWarrior:
-  Message: "Typical Keyboard typos"
+  Message: "Typical keyboard typos"
   Match:
-    - ",,"
-
-Style/DoubleSpace:
-  Message: "Double space found"
-  Match:
-    - "\\s~\\s?|\\s?~\\s"
-
-Style/NoSpaceBefore:
-  Message: "Remove preceding whitespace"
-  Match:
-    - "\\s[,!:?\\.\\;:]"
-    - "\\s\\\\label\\{"
-    - "\\s\\\\index\\{"
-    - "\\s\\\\footnote(\\{|\\[)"
+    - "[,.]{2,}"
 
 Style/NoPeriodAfter:
   Message: "Remove succeeding period"
