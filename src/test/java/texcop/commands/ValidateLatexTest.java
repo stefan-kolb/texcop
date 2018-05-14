@@ -21,9 +21,9 @@ public class ValidateLatexTest {
 
     private List<RegexCop> cops = new ArrayList<>();
 
-    private void loadRules() {
+    private void loadRules(String topic) {
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        InputStream is = classloader.getResourceAsStream("texcop/cop/style/rules.yml");
+        InputStream is = classloader.getResourceAsStream(String.format("texcop/cop/%s.yml", topic));
 
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         try {
@@ -32,13 +32,13 @@ public class ValidateLatexTest {
                 cops.add(new RegexCop(entry.getKey(), entry.getValue().matches, entry.getValue().message));
             }
         } catch (Exception e) {
-            System.err.println("Error reading rules.yml: " + e.getMessage());
+            System.err.println(String.format("Error reading %s.yml: %s", topic, e.getMessage()));
         }
     }
 
     @Test
     public void testRules() throws Exception {
-        loadRules();
+        ValidateLatex.topics.stream().forEach(t -> loadRules(t));
         Path errorFile = Paths.get("src/test/resources/errors.tex");
 
         Set<String> matchedRules = new HashSet<>();

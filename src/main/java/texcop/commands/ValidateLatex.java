@@ -3,6 +3,7 @@ package texcop.commands;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -22,13 +23,15 @@ import texcop.cop.latex.TextInsideMathMode;
  */
 public class ValidateLatex implements FileTask {
 
+    protected static final List<String> topics = Arrays.asList("style", "layout", "math", "latex");
+
     private Config config;
     private List<FileTask> cops = new ArrayList<>();
 
     public ValidateLatex() {
         config = Config.load();
         loadCops();
-        loadRules();
+        topics.stream().forEach(t -> loadRules(t));
     }
 
     @Override
@@ -55,9 +58,9 @@ public class ValidateLatex implements FileTask {
         return offenses;
     }
 
-    private void loadRules() {
+    private void loadRules(String topic) {
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        InputStream is = classloader.getResourceAsStream("texcop/cop/style/rules.yml");
+        InputStream is = classloader.getResourceAsStream(String.format("texcop/cop/%s.yml", topic));
 
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         try {
@@ -66,7 +69,7 @@ public class ValidateLatex implements FileTask {
                 cops.add(new RegexCop(entry.getKey(), entry.getValue().matches, entry.getValue().message));
             }
         } catch (Exception e) {
-            System.err.println("Error reading rules.yml: " + e.getMessage());
+            System.err.println(String.format("Error reading %s.yml: %s", topic, e.getMessage()));
         }
     }
 

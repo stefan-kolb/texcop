@@ -1,0 +1,9 @@
+Math/Times:
+  Message: "Use $\\times$ instead of x"
+  Match:
+    - "\\d+(x)\\d+"
+
+Math/Dots:
+  Message: "Use \\dots* for ellipsis in math mode, e.g., \\dotsc"
+  Match:
+    - "(?:\\$|\\\\\\(|\\\\\\[).*?(\\.\\.\\.).*?(?:\\$|\\\\\\)|\\\\\\])"

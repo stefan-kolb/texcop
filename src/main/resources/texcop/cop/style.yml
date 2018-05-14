@@ -59,11 +59,6 @@ Style/NoSpaceBefore:
     - "\\s\\\\index\\{"
     - "\\s\\\\footnote(\\{|\\[)"
 
-Math/Times:
-  Message: "Use $\\times$ instead of x"
-  Match:
-    - "\\d+(x)\\d+"
-
 Style/NoPeriodAfter:
   Message: "Remove succeeding period"
   Match:
@@ -80,9 +75,9 @@ Style/Footnote:
     - "\\\\footnote\\{See \\\\url\\{[^\\}]+\\}\\}"
 
 Style/SpellNumbers:
-  Message: "Spell numbers from zero to nine"
+  Message: "Spell out numbers from zero to nine"
   Match:
-    - "[0-9]%"
+    - "\\\\[a-zA-z]+\\{.*?}|\\s([0-9])\\s"
 
 Style/SimonHarrer:
   Message: "Simon Harrer's style set"
@@ -99,30 +94,11 @@ Style/SimonHarrer:
     - "(all of the) "
     - "Tt "
 
-Latex/MissingBrackets:
-  Message: "Put the parameter into brackets for correct rendering"
+Style/PrettyUrl:
+  Message: "Ending slashes of Urls can most likely be removed"
   Match:
-    - "[\\^_]\\w{2,}"
-
-Latex/AcronymInsideCaption:
-  Message: "Do not use acronyms inside captions"
-  Match:
-    - "\\\\caption\\{.*\\\\ac\\{"
-
-Latex/Avoid:
-  Message: "Avoid $$ shorthand as it may cause problems, particularly with the AMS-LaTeX macros"
-  Match:
-    - "\\${2,2}.*?\\${2,2}"
-
-Math/Dots:
-  Message: "Use \\dots* for ellipsis in math mode, e.g., \\dotsc"
-  Match:
-    - "(?:\\$|\\\\\\(|\\\\\\[).*?(\\.\\.\\.).*?(?:\\$|\\\\\\)|\\\\\\])"
-
-Latex/WrapUrl:
-  Message: "Wrap URLs inside \\url command"
-  Match:
-    - "(?<!\\\\url\\{)(https?|ftp)://[^\\s/$.?#].[^\\s]*"
+    - "(https?|ftp)://[^\\s/$.?#].[^\\s]*(/)}"
+  Correction: ""
 
 Style/CiteBeforePeriod:
   Message: "Use cite before the period"
@@ -133,32 +109,3 @@ Style/CapitalizeWords:
   Message: "Capitalize words"
   Match:
     - "(table|figure|section|listing|chapter|theorem|corollary|definition)~\\\\ref"
-
-Spelling/Lowercase:
-  Message: "Word should not be capitalized"
-  Match:
-    # https://english.stackexchange.com/questions/157178/capitals-or-not-for-open-source
-    - "\\s(Open[\\s-]Source)\\b"
-
-Spelling/Uppercase:
-  Message: "Word should be capitalized"
-  Match:
-    - "\\s(docker)\\b"
-
-# https://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings
-Spelling/DuplicateWords:
-  Message: "Duplicate words are often unintended typos"
-  Match:
-    - "\\b(\\w+)\\s+\\1\\b"
-    - " a an "
-    - " a the "
-    - " an a "
-    - " an and "
-    - " the this "
-    - " are been "
-    - " was been "
-
-Layout/SpaceBefore:
-  Message: "Add preceding whitespace"
-  Match:
-    - "[^\\s~\\{\\[]\\\\cite\\{"

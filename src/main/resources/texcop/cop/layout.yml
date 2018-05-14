@@ -1,0 +1,4 @@
+Layout/SpaceBefore:
+  Message: "Add preceding whitespace"
+  Match:
+    - "[^\\s~\\{\\[]\\\\cite\\{"
