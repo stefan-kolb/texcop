@@ -86,6 +86,12 @@ Style/CapitalizeWords:
   Message: "Capitalize words"
   Match:
     - "(table|figure|section|listing|chapter|theorem|corollary|definition)~\\\\ref"
+    - "\\binternet\\b"
+
+Style/LowercaseWords:
+  Message: "Lowercase words"
+  Match:
+    - "\\bOpen Source\\b"
 
 Style/Ellipsis:
   Message: "Use \\ldots for ellipsis in text mode"
