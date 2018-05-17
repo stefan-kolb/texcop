@@ -52,7 +52,7 @@ public class ValidateLatex implements FileTask {
 
         for (FileTask cop : cops) {
             CopConfig cc = config.forCop(cop.getName());
-            if (cc == null || cc.isEnabled() && !excludesFile(cc.exclude, filePath)) {
+            if (cc == null || (cc.isEnabled() && !excludesFile(cc.exclude, filePath))) {
                 offenses.addAll(cop.execute(filePath));
             }
         }
