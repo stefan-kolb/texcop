@@ -34,6 +34,14 @@ public class ValidateLatex implements FileTask {
         config = Config.load();
         loadCops();
         topics.stream().forEach(t -> loadRules(t));
+        // FIXME other cops like bibtex will raise an error here, load cops globally?!
+        warnUnrecognizedCopConfigs();
+    }
+
+    private void warnUnrecognizedCopConfigs() {
+        config.keySet().stream()
+                .filter(opt -> cops.stream().map(c -> c.getName()).noneMatch(c -> c.equals(opt)))
+                .forEach(opt -> System.err.println("Warning: Unrecognized cop config: " + opt));
     }
 
     @Override
