@@ -2,10 +2,12 @@ package texcop.commands;
 
 import java.io.InputStream;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -50,12 +52,21 @@ public class ValidateLatex implements FileTask {
 
         for (FileTask cop : cops) {
             CopConfig cc = config.forCop(cop.getName());
-            if (cc == null || cc.isEnabled()) {
+            if (cc == null || cc.isEnabled() && !excludesFile(cc.exclude, filePath)) {
                 offenses.addAll(cop.execute(filePath));
             }
         }
 
         return offenses;
+    }
+
+    private boolean excludesFile(List<String> excludePaths, Path filePath) {
+        if (excludePaths == null || excludePaths.isEmpty()) {
+            return false;
+        }
+        final Path workingDirectory = Paths.get("").toAbsolutePath();
+        List<Path> excludes = excludePaths.stream().map(p -> workingDirectory.resolve(p).toAbsolutePath()).collect(Collectors.toList());
+        return excludes.stream().anyMatch(p -> p.equals(filePath));
     }
 
     private void loadRules(String topic) {

@@ -14,6 +14,9 @@ public class CopConfig {
     @JsonProperty("Match")
     public List<String> matches;
 
+    @JsonProperty("Exclude")
+    public List<String> exclude;
+
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
