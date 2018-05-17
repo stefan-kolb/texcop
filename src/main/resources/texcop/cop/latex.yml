@@ -17,3 +17,8 @@ Latex/WrapUrl:
   Message: "Wrap URLs inside \\url command"
   Match:
     - "(?<!\\\\url\\{)(https?|ftp)://[^\\s/$.?#].[^\\s]*"
+
+Latex/QuotationMarks:
+  Message: "Use single or double `` and '' for English quotation marks"
+  Match:
+    - "[^\\\\]?(\"|´´|'').+?[^\\\\]?(\"|´´|``)"
