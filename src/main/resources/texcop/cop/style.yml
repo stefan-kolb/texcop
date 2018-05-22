@@ -87,6 +87,7 @@ Style/CapitalizeWords:
   Match:
     - "(table|figure|section|listing|chapter|theorem|corollary|definition)~\\\\ref"
     - "\\binternet\\b"
+    - "[\\s\\.]git[\\s\\.]"
 
 Style/LowercaseWords:
   Message: "Lowercase words"
