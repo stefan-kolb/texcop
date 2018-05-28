@@ -6,7 +6,7 @@ import java.util.List;
 
 public class CopConfig {
     @JsonProperty("Enabled")
-    private boolean enabled;
+    private boolean enabled = true;
 
     @JsonProperty("Message")
     public String message;
