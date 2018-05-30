@@ -34,7 +34,7 @@ public class ValidateBibtex implements FileTask {
 
         try {
             BibTeXDatabase database = parseBibtexFile(file);
-            validate(database, file);
+            offenses.addAll(validate(database, file));
         } catch (IllegalStateException e) {
             System.out.println(e.getMessage());
         }
@@ -63,49 +63,70 @@ public class ValidateBibtex implements FileTask {
         return result;
     }
 
-    private void validate(BibTeXDatabase database, Path bibtexFile) {
+    private List<Offense> validate(BibTeXDatabase database, Path bibtexFile) {
+        List<Offense> offenses = new ArrayList<>();
+
         for (BibTeXEntry entry : database.getEntries().values()) {
             String type = entry.getType().toString().toLowerCase();
 
-            detectRequiredAndMissingFields(bibtexFile, entry, type);
-            detectProceedingsWithPages(bibtexFile, entry, type);
-            detectAbbreviations(bibtexFile, entry, type);
+            //detectRequiredAndMissingFields(bibtexFile, entry, type).ifPresent(offenses::add);
+            //detectProceedingsWithPages(bibtexFile, entry, type).ifPresent(offenses::add);
+            //detectAbbreviations(bibtexFile, entry, type).ifPresent(offenses::add);
+            validateInProceedingsBooktitle(bibtexFile, entry, type).ifPresent(offenses::add);
         }
+        return offenses;
     }
 
-    private void detectRequiredAndMissingFields(Path bibtexFile, BibTeXEntry entry, String type) {
+    private Optional<Offense> detectRequiredAndMissingFields(Path bibtexFile, BibTeXEntry entry, String type) {
         List<String> requiredFields = getRequiredFieldsDatabase().get(type);
         if (requiredFields == null) {
-            createOffense(bibtexFile, entry, "no required fields available for this type");
-            return;
+            return Optional.of(createOffense(bibtexFile, entry, "no required fields available for this type"));
         }
 
         for (String key : requiredFields) {
-            ensureKeyExistence(bibtexFile, entry, new Key(key));
+            Optional<Offense> o = ensureKeyExistence(bibtexFile, entry, new Key(key));
+
+            if (o.isPresent()) {
+                return o;
+            }
         }
+        return Optional.empty();
     }
 
-    private void detectProceedingsWithPages(Path bibtexFile, BibTeXEntry entry, String type) {
+    private Optional<Offense> validateInProceedingsBooktitle(Path bibtexFile, BibTeXEntry entry, String type) {
+        final String pattern = "Proceedings of the ";
+        if ("inproceedings".equals(type)) {
+            if (entry.getField(BibTeXEntry.KEY_BOOKTITLE) == null || !entry.getField(BibTeXEntry.KEY_BOOKTITLE).toUserString().startsWith(pattern)) {
+                return Optional.of(createOffense(bibtexFile, entry, "InProceedings booktitle should start with: Proceedings of the ..."));
+            }
+        }
+        return Optional.empty();
+    }
+
+    private Optional<Offense> detectProceedingsWithPages(Path bibtexFile, BibTeXEntry entry, String type) {
         if ("proceedings".equals(type) && entry.getField(BibTeXEntry.KEY_PAGES) != null) {
-            createOffense(bibtexFile, entry, "proceedings with pages, maybe should be inproceedings?");
+            return Optional.of(createOffense(bibtexFile, entry, "proceedings with pages, maybe should be inproceedings?"));
         }
+        return Optional.empty();
     }
 
-    private void detectAbbreviations(Path bibtexFile, BibTeXEntry entry, String type) {
+    private Optional<Offense> detectAbbreviations(Path bibtexFile, BibTeXEntry entry, String type) {
         if ("article".equals(type) && entry.getField(BibTeXEntry.KEY_JOURNAL) != null && entry.getField(BibTeXEntry.KEY_JOURNAL).toUserString().contains(".")) {
-            createOffense(bibtexFile, entry, "journal is abbreviated");
+            return Optional.of(createOffense(bibtexFile, entry, "journal is abbreviated"));
         }
+        return Optional.empty();
     }
 
-    private void ensureKeyExistence(Path bibtexFile, BibTeXEntry entry, Key key) {
+    private Optional<Offense> ensureKeyExistence(Path bibtexFile, BibTeXEntry entry, Key key) {
         if (!entry.getFields().containsKey(key) || entry.getFields().get(key).toString().trim().isEmpty()) {
             String message = key + " is missing";
-            createOffense(bibtexFile, entry, message);
+            return Optional.of(createOffense(bibtexFile, entry, message));
         }
+        return Optional.empty();
     }
 
     private Offense createOffense(Path bibtexFile, BibTeXEntry entry, String message) {
-        return new Offense(null, String.format("%s\t%s\t%s\t%s%n", bibtexFile, entry.getKey(), entry.getType().toString().toUpperCase(), message));
+        return new Offense(new Location(entry.getKey().toString(), 0, 0 , 0), String.format("%s\t%s\t%s\t%s%n", bibtexFile, entry.getKey(), entry.getType().toString().toUpperCase(), message));
     }
 
     private BibTeXDatabase parseBibtexFile(Path bibtexFile) {
