@@ -21,4 +21,4 @@ Latex/WrapUrl:
 Latex/QuotationMarks:
   Message: "Use single or double `` and '' for English quotation marks"
   Match:
-    - "[^\\\\](\"|´´|'').+?[^\\\\](\"|´´|``)"
+    - "(?<!\\\\)(\"|´´|'').+?(?<!\\\\)(\"|´´|``)"
