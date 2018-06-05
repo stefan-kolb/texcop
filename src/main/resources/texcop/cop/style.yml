@@ -75,7 +75,6 @@ Style/PrettyUrl:
   Message: "Ending slashes of Urls can most likely be removed"
   Match:
     - "(https?|ftp)://[^\\s/$.?#].[^\\s]*(/)}"
-  Correction: ""
 
 Style/CiteBeforePeriod:
   Message: "Use cite before the period"

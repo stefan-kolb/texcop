@@ -20,7 +20,7 @@ Requires JDK 8 with JAVA_HOME set to the JDK path!
 
     # in your latex directory
     $ texcop pdf # create the pdf with pdflatex and bibtex using main.tex as the starting file
-    $ texcop validate # validates all .tex and .bib files using Simon's validation rules
+    $ texcop validate # validates all .tex and .bib files
     $ texcop clean # remove all generated files like .div, .pdf, .log, ...
 
 ## Commands
