@@ -3,6 +3,8 @@ package texcop.commands.latex;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -10,7 +12,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import texcop.commands.ValidateLinks;
 import texcop.cop.Location;
 
 public class Link {
@@ -80,18 +81,25 @@ public class Link {
 
     private static String getFinalURL(String url) {
         try {
-            HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
+            URL parsedUrl = new URL(url);
+            HttpURLConnection con = (HttpURLConnection) parsedUrl.openConnection();
             con.setInstanceFollowRedirects(false);
             con.connect();
             con.getInputStream();
 
             if (con.getResponseCode() == HttpURLConnection.HTTP_MOVED_PERM || con.getResponseCode() == HttpURLConnection.HTTP_MOVED_TEMP) {
                 String redirectUrl = con.getHeaderField("Location");
-                return getFinalURL(redirectUrl);
+                URI newLocation = new URI(redirectUrl);
+                if (!newLocation.isAbsolute()) {
+                    newLocation = new URL(parsedUrl.getProtocol(), parsedUrl.getHost(), parsedUrl.getPort(), newLocation.toASCIIString()).toURI();
+                }
+                return getFinalURL(newLocation.toASCIIString());
             }
             return url;
         } catch (IOException e) {
             return url;
+        } catch (URISyntaxException e) {
+            return "";
         }
     }
 }

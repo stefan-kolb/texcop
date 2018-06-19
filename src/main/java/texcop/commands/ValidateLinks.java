@@ -1,16 +1,16 @@
 package texcop.commands;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import texcop.FileTask;
 import texcop.commands.latex.Latex;
 import texcop.commands.latex.Link;
 import texcop.cop.Offense;
-import texcop.tasks.FileSystemTasks;
-
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.nio.file.Path;
-import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Find acronyms defined in the acronym package but that are not yet included.
