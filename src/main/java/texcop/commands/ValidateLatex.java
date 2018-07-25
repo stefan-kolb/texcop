@@ -17,6 +17,7 @@ import texcop.cop.CopConfig;
 import texcop.cop.Offense;
 import texcop.cop.RegexCop;
 import texcop.cop.latex.TextInsideMathMode;
+import texcop.cop.style.Capitalization;
 
 /**
  * Validates all .tex files within the current directory and its descendants.
@@ -95,5 +96,6 @@ public class ValidateLatex implements FileTask {
     private void loadCops() {
         // TODO maybe use reflection later
         cops.add(new TextInsideMathMode());
+        cops.add(new Capitalization());
     }
 }

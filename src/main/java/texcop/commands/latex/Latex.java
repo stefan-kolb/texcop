@@ -24,6 +24,7 @@ public interface Latex {
         List<String> lines = readFile(file);
         for (int lineNumber = 1; lineNumber <= lines.size(); lineNumber++) {
             String line = lines.get(lineNumber - 1);
+            // TODO problem with recognizing inline cops
 //            if (line.startsWith("%")) {
 //                continue;
 //            }
