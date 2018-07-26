@@ -34,7 +34,8 @@ Style/SpellingMistakes:
 Style/KeyboardWarrior:
   Message: "Typical keyboard typos"
   Match:
-    - "([,])\\1{2,}"
+    - "([,.!?:;])\\1{2,}" # duplicate punctuation marks
+    - "(\\b\\S+\\b)\\s+\\b\\1\\b" # duplicate words after another
 
 Style/NoPeriodAfter:
   Message: "Remove succeeding period"
