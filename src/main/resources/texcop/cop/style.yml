@@ -95,7 +95,7 @@ Style/LowercaseWords:
     - "\\bOpen Source\\b"
 
 Style/Ellipsis:
-  Message: "Use \\ldots for ellipsis in text mode"
+  Message: "Use \\dots for ellipsis in text mode"
   Match:
     - "(\\.{3,3})"
 
