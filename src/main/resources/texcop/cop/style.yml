@@ -120,4 +120,4 @@ Style/PunctuationMarkInsideQuotationMarks:
 Style/PunctuationMarkOutsideQuotationMarks:
   Message: "Put punctuation mark outside quotation marks"
   Match:
-    - "[:;?!](?<!\\\\)(\"|''|')" # if ?! belong to the quote put inside
+    - "[:;](?<!\\\\)(\"|''|')" # if ?! belong to the quote put inside
