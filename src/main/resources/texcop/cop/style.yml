@@ -108,14 +108,14 @@ Style/NumberFormat:
 
 Style/DoubleQuotationMarks:
   Message: "Use double quotation marks `` and '' instead of single"
-  Documentation: "https://github.com/stefan-kolb/texcop/blob/master/docs/style.md#doublequotationmarks"
+  # Documentation: "https://github.com/stefan-kolb/texcop/blob/master/docs/style.md#doublequotationmarks"
   Match:
     - "(?<!\\\\|`)`[^`]+?(?<!\\\\)'"
 
 Style/PunctuationMarkInsideQuotationMarks:
   Message: "Put punctuation mark inside quotation marks"
   Match:
-    - "(?<!\\\\)(\"|''|')[,\.]"
+    - "(?<!\\\\)(\"|''|')[,\\.]"
 
 Style/PunctuationMarkOutsideQuotationMarks:
   Message: "Put punctuation mark outside quotation marks"
