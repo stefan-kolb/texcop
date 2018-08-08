@@ -6,10 +6,10 @@ Latex/MissingBrackets:
 Latex/AcronymInsideCaption:
   Message: "Do not use acronyms inside captions"
   Match:
-    - "\\\\caption\\{.*\\\\ac\\{"
+    - "\\\\caption\\{.*\\\\ac.\\{"
 
 Latex/Avoid:
-  Message: "Avoid $$ shorthand as it may cause problems, particularly with the AMS-LaTeX macros"
+  Message: "Avoid $$ shorthand as it may cause problems, particularly with the AMS LaTeX macros"
   Match:
     - "\\${2,2}.*?\\${2,2}"
 
@@ -22,3 +22,8 @@ Latex/QuotationMarks:
   Message: "Use single or double `` and '' for English quotation marks"
   Match:
     - "(?<!\\\\)(\"|´´|'').+?(?<!\\\\)(\"|´´|``)"
+
+Latex/DoubleQuotationMarks:
+  Message: "Use double quotation marks `` and '' instead of single"
+  Match:
+    - "(?<!\\\\|`)`[^`]+?(?<!\\\\)'"
