@@ -22,8 +22,3 @@ Latex/QuotationMarks:
   Message: "Use single or double `` and '' for English quotation marks"
   Match:
     - "(?<!\\\\)(\"|´´|'').+?(?<!\\\\)(\"|´´|``)"
-
-Latex/DoubleQuotationMarks:
-  Message: "Use double quotation marks `` and '' instead of single"
-  Match:
-    - "(?<!\\\\|`)`[^`]+?(?<!\\\\)'"
