@@ -7,6 +7,15 @@ e.g., generating a `.gitignore` file, creating the final pdf and validating the 
 
 **Only** works for UTF-8 encoded `.tex` and `.bib` files.
 
+## Works best when
+
+- the citation style is numeric/alphanumeric.
+- each sentence is in its own line.
+- your texts are written in English
+- labels in tables/figures should be put right after the caption
+- does not work that well if you define a lot of custom macros for abbreviating latex commands
+- all files are in UTF-8 and use .tex file ending
+
 ## Installation
 
 Requires JDK 8 with JAVA_HOME set to the JDK path!
@@ -96,15 +105,24 @@ task texCop(type: JavaExec) {
 }
 test.dependsOn texCop
 ``` 
-    
-## Works best when
 
-- the citation style is numeric/alphanumeric.
-- each sentence is in its own line.
-- your texts are written in English
-- labels in tables/figures should be put right after the caption
-- does not work that well if you define a lot of custom macros for abbreviating latex commands
-- all files are in UTF-8 and use .tex file ending
+## Add your own custom cops
+    
+The easiest way to add your own cops is to add a new RegEx cop to any YAML file, e.g., `style.yml`.
+It's easy to add your checks for typical typos or custom validations.
+
+```yaml
+Style/StefanKolb:
+  Message: "Stefan Kolb's style set"
+  Match:
+    - "amongst" # use among instead
+    - "independently from" # independently of
+    - "faster time" # # shorter time
+    - "(on-premise |on premise )" # on premises
+    - "\\b[aA]ll of the\\b" # all the
+    - "period of time" # period
+    - "\\bat al\\b" # et al
+``` 
 
 ## Credits
 
