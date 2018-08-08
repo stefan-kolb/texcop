@@ -109,7 +109,7 @@ test.dependsOn texCop
 ## Add your own custom cops
     
 The easiest way to add your own cops is to add a new RegEx cop to any YAML file, e.g., `style.yml`.
-It's easy to add your checks for typical typos or custom validations.
+Just add your checks for typical typos or custom validations.
 
 ```yaml
 Style/StefanKolb:
@@ -117,7 +117,7 @@ Style/StefanKolb:
   Match:
     - "amongst" # use among instead
     - "independently from" # independently of
-    - "faster time" # # shorter time
+    - "faster time" # shorter time
     - "(on-premise |on premise )" # on premises
     - "\\b[aA]ll of the\\b" # all the
     - "period of time" # period
